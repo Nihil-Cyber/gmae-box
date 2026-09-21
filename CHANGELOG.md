@@ -2,6 +2,11 @@
 
 本檔依照 [Keep a Changelog](https://keepachangelog.com/zh-TW/1/1.0/) 格式，版本號跟 [Semantic Versioning](https://semver.org/lang/zh-TW/)。
 
+## [Unreleased]
+
+- 喺 GitHub 建立公開專案 [Nihil-Cyber/gmae-box](https://github.com/Nihil-Cyber/gmae-box)
+- 開咗跟進 Issue：玩家名稱、錯題本、數獨提示、GitHub Pages、更多教育遊戲類型
+
 ## [0.1.0] — 2026-09-21
 
 Gmae Box 第一個公開版本。由「Wesley 數學樂園」重新命名，並以教育遊戲盒作為長遠方向。

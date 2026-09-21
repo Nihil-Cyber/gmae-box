@@ -4,6 +4,8 @@
 
 目前第一位玩家角色係 **Wesley**。
 
+原始碼：[github.com/Nihil-Cyber/gmae-box](https://github.com/Nihil-Cyber/gmae-box)
+
 ## 而家有咩遊戲
 
 | 遊戲 | 練習重點 | 難度 |
