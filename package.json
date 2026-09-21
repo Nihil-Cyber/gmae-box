@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/Nihil-Cyber/gmae-box/issues"
   },
-  "homepage": "https://github.com/Nihil-Cyber/gmae-box#readme",
+  "homepage": "https://nihil-cyber.github.io/gmae-box/",
   "type": "module",
   "scripts": {
     "dev": "vite",

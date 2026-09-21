@@ -4,8 +4,10 @@
 
 ## [Unreleased]
 
+- 用 GitHub Pages 發布 Web App：https://nihil-cyber.github.io/gmae-box/
+- 每次推去 `main` 都會自動編譯靜態 HTML 並上線
 - 喺 GitHub 建立公開專案 [Nihil-Cyber/gmae-box](https://github.com/Nihil-Cyber/gmae-box)
-- 開咗跟進 Issue：玩家名稱、錯題本、數獨提示、GitHub Pages、更多教育遊戲類型
+- 開咗跟進 Issue：玩家名稱、錯題本、數獨提示、更多教育遊戲類型
 
 ## [0.1.0] — 2026-09-21
 

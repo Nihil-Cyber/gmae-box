@@ -5,6 +5,7 @@
 - **類型**：H5 教育遊戲（Vite + React + TypeScript）
 - **第一位玩家角色**：Wesley
 - **目前範圍**：數學四款小遊戲，可喺手機／平板瀏覽器使用
+- **網上玩**：https://nihil-cyber.github.io/gmae-box/
 
 ## 更新情況
 
@@ -15,7 +16,7 @@
 | 本機進度 | 完成 | 星星即時入帳；舊進度會自動遷移 |
 | 文件（狀態／問題／修復／更新紀錄） | 完成 | 見本資料夾同 `CHANGELOG.md` |
 | GitHub 新專案 | 完成 | https://github.com/Nihil-Cyber/gmae-box |
-| 線上部署（GitHub Pages 等） | 未開始 | 見路線圖 |
+| 線上部署（GitHub Pages 等） | 完成 | https://nihil-cyber.github.io/gmae-box/ |
 | 語文／邏輯／科學遊戲 | 未開始 | 見路線圖 |
 | 自訂玩家名稱 | 未開始 | 而家固定問候 Wesley |
 
@@ -28,7 +29,7 @@
 
 ## 點樣確認呢個版本
 
-1. `npm install` 然後 `npm run dev`
+1. 打開 https://nihil-cyber.github.io/gmae-box/
 2. 主頁標題係 **Gmae Box**
 3. 四個遊戲都可以揀難度、開始、答題／填盤、返回
 4. 答啱之後返回主頁，星星同「答啱題數／完成局數」仍然在

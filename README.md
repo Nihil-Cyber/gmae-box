@@ -1,10 +1,14 @@
 # Gmae Box
 
-有意義嘅教育遊戲盒。用輕量 H5 小遊戲，訓練小朋友嘅計算、推理同解難能力。而家由數學起步，之後會陸續加入語文、邏輯、科學等更多類型。
+**直接玩：** [https://nihil-cyber.github.io/gmae-box/](https://nihil-cyber.github.io/gmae-box/)
+
+有意義嘅教育遊戲盒。用輕量 Web App 小遊戲，訓練小朋友嘅計算、推理同解難能力。而家由數學起步，之後會陸續加入語文、邏輯、科學等更多類型。
 
 目前第一位玩家角色係 **Wesley**。
 
 原始碼：[github.com/Nihil-Cyber/gmae-box](https://github.com/Nihil-Cyber/gmae-box)
+
+GitHub 檔案頁入面撳 `index.html` **唔會**行起遊戲（只會見到原始碼）。真正打開程式請用上面嘅 GitHub Pages 網址。
 
 ## 而家有咩遊戲
 
@@ -18,6 +22,16 @@
 每局練習題 10 題。第一次答啱會得到星星；進度存在瀏覽器本機。
 
 ## 點樣運行
+
+### 網上直接打開
+
+手機、平板或電腦瀏覽器打開：
+
+**https://nihil-cyber.github.io/gmae-box/**
+
+每次 `main` 分支有更新，GitHub Actions 都會重新編譯並發布呢個網址。
+
+### 本機開發
 
 ```bash
 npm install

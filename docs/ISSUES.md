@@ -11,7 +11,6 @@
 | GB-3 | [#2](https://github.com/Nihil-Cyber/gmae-box/issues/2) | 中 | 未有錯題本 | 答錯之後冇得集中複習 | 紀錄錯題，主頁加「再練一次」 |
 | GB-4 | [#3](https://github.com/Nihil-Cyber/gmae-box/issues/3) | 低 | 數獨「提示」只填空格，唔會改正填錯嘅格 | 填錯之後靠提示都完成唔到 | 提示優先修正衝突格，再填空格 |
 | GB-5 | — | 低 | 連續猛撳數獨提示，同一輪更新可能只填一格 | 自動化／連撳時 | 用 functional state update |
-| GB-6 | [#4](https://github.com/Nihil-Cyber/gmae-box/issues/4) | 中 | 未部署到公開網址 | 家長要自己開 `npm run dev` 先玩到 | GitHub Pages 或同等靜態託管 |
 | GB-7 | — | 低 | 未有離線 PWA 安裝 | 加到主畫面之後重開可能要有網絡 | 加 manifest 同 service worker |
 | GB-8 | [#5](https://github.com/Nihil-Cyber/gmae-box/issues/5) | 低 | 只有數學類型 | 同「各種意義嘅教育遊戲」願景仲有距離 | 見 [ROADMAP.md](./ROADMAP.md) |
 
@@ -25,6 +24,7 @@
 | GB-F4 | 0.1.0 | 答錯三次會卡住 | 第三次顯示答案並自動下一題 |
 | GB-F5 | 0.1.0 | Vite 預設 README／標題同遊戲無關 | 換成 Gmae Box 文件同品牌 |
 | GB-F6 | 0.1.0 | 產品改名後舊進度 key 會失效 | 讀取時兼容 `wesley-math-progress-v1`，並寫入新 key |
+| GB-F7 | Unreleased | 喺 GitHub 撳 HTML 唔會行起遊戲 | 用 GitHub Pages 發布編譯後嘅 Web App：https://nihil-cyber.github.io/gmae-box/ |
 
 ## 點樣回報新問題
 
