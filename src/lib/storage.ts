@@ -1,13 +1,9 @@
 import type { QuizStat, Stats } from '../types'
+import { emptyGarden, emptyQuiz } from '../types'
+import { tickGarden } from './garden'
 
 const KEY = 'gmae-box-progress-v1'
 const LEGACY_KEY = 'wesley-math-progress-v1'
-
-const emptyQuiz = (): QuizStat => ({
-  rounds: 0,
-  firstTry: 0,
-  questions: 0,
-})
 
 export const emptyStats = (): Stats => ({
   stars: 0,
@@ -15,8 +11,15 @@ export const emptyStats = (): Stats => ({
   addsub: emptyQuiz(),
   muldiv: emptyQuiz(),
   olympiad: emptyQuiz(),
+  readchar: emptyQuiz(),
+  vocab: emptyQuiz(),
   sudoku: { wins: 0 },
+  garden: emptyGarden(),
 })
+
+function mergeQuiz(base: QuizStat, extra?: Partial<QuizStat>): QuizStat {
+  return { ...base, ...extra }
+}
 
 export function loadStats(): Stats {
   try {
@@ -28,12 +31,15 @@ export function loadStats(): Stats {
     const next: Stats = {
       ...base,
       ...parsed,
-      addsub: { ...base.addsub, ...parsed.addsub },
-      muldiv: { ...base.muldiv, ...parsed.muldiv },
-      olympiad: { ...base.olympiad, ...parsed.olympiad },
+      addsub: mergeQuiz(base.addsub, parsed.addsub),
+      muldiv: mergeQuiz(base.muldiv, parsed.muldiv),
+      olympiad: mergeQuiz(base.olympiad, parsed.olympiad),
+      readchar: mergeQuiz(base.readchar, parsed.readchar),
+      vocab: mergeQuiz(base.vocab, parsed.vocab),
       sudoku: { ...base.sudoku, ...parsed.sudoku },
+      garden: tickGarden({ ...base.garden, ...parsed.garden }),
     }
-    if (!fromNew) localStorage.setItem(KEY, JSON.stringify(next))
+    localStorage.setItem(KEY, JSON.stringify(next))
     return next
   } catch {
     return emptyStats()

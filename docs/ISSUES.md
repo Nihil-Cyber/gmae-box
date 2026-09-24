@@ -12,7 +12,7 @@
 | GB-4 | [#3](https://github.com/Nihil-Cyber/gmae-box/issues/3) | 低 | 數獨「提示」只填空格，唔會改正填錯嘅格 | 填錯之後靠提示都完成唔到 | 提示優先修正衝突格，再填空格 |
 | GB-5 | — | 低 | 連續猛撳數獨提示，同一輪更新可能只填一格 | 自動化／連撳時 | 用 functional state update |
 | GB-7 | — | 低 | 未有離線 PWA 安裝 | 加到主畫面之後重開可能要有網絡 | 加 manifest 同 service worker |
-| GB-8 | [#5](https://github.com/Nihil-Cyber/gmae-box/issues/5) | 低 | 只有數學類型 | 同「各種意義嘅教育遊戲」願景仲有距離 | 見 [ROADMAP.md](./ROADMAP.md) |
+| GB-8 | [#5](https://github.com/Nihil-Cyber/gmae-box/issues/5) | 低 | 科學／邏輯遊戲仲未有 | 願景未完成 | 見 [ROADMAP.md](./ROADMAP.md) |
 
 ## 已修復
 

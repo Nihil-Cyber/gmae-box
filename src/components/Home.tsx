@@ -6,7 +6,7 @@ const GAMES: {
   title: string
   desc: string
   emoji: string
-  tone: 'mint' | 'coral' | 'grape' | 'sky'
+  tone: 'mint' | 'coral' | 'grape' | 'sky' | 'rose' | 'amber'
 }[] = [
   {
     id: 'addsub',
@@ -36,15 +36,34 @@ const GAMES: {
     emoji: '🔢',
     tone: 'sky',
   },
+  {
+    id: 'readchar',
+    title: '認一認字',
+    desc: '睇圖、認字、辨相似字',
+    emoji: '📝',
+    tone: 'rose',
+  },
+  {
+    id: 'vocab',
+    title: '單字配對',
+    desc: '詞語、意思、填字',
+    emoji: '📖',
+    tone: 'amber',
+  },
 ]
 
 type Props = {
   stats: Stats
   onPlay: (id: GameId) => void
+  onGarden: () => void
   onToggleMute: () => void
 }
 
-export function Home({ stats, onPlay, onToggleMute }: Props) {
+export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
+  const petHint = stats.garden.activePet
+    ? '寵物喺度等你摸一摸'
+    : '用星星領養寵物、換裝飾'
+
   return (
     <section>
       <div className="topbar">
@@ -67,9 +86,18 @@ export function Home({ stats, onPlay, onToggleMute }: Props) {
         <div>
           <h1>Gmae Box</h1>
           <p className="tagline">有意義嘅教育遊戲盒</p>
-          <p>Wesley，今日嚟揀一款遊戲開始練習啦！答啱就會得到星星。</p>
+          <p>Wesley，練習賺星星，返家園佈置同養寵物啦！</p>
         </div>
       </div>
+
+      <button type="button" className="game-card peach wide" onClick={onGarden}>
+        <div>
+          <div className="emoji">🏡</div>
+          <h2>我嘅家園</h2>
+          <p>{petHint}</p>
+        </div>
+        <div className="meta">商店 · 寵物 · 裝飾</div>
+      </button>
 
       <div className="game-grid">
         {GAMES.map((game) => {
@@ -94,7 +122,7 @@ export function Home({ stats, onPlay, onToggleMute }: Props) {
           )
         })}
       </div>
-      <p className="home-foot">而家由數學起步，之後會加入語文、邏輯、科學等更多有意義嘅教育遊戲。</p>
+      <p className="home-foot">答啱題目賺星星，去家園買裝飾、養寵物。語文同數學都可以一齊練。</p>
     </section>
   )
 }

@@ -4,10 +4,16 @@
 
 ## [Unreleased]
 
-- 用 GitHub Pages 發布 Web App：https://nihil-cyber.github.io/gmae-box/
-- 每次推去 `main` 都會自動編譯靜態 HTML 並上線
-- 喺 GitHub 建立公開專案 [Nihil-Cyber/gmae-box](https://github.com/Nihil-Cyber/gmae-box)
-- 開咗跟進 Issue：玩家名稱、錯題本、數獨提示、更多教育遊戲類型
+## [0.2.0] — 2026-09-24
+
+認字、單字同家園商店。
+
+### 新增
+
+- 認字遊戲：睇圖認字、睇字認意思、高級辨相似字，可讀出嚟
+- 單字遊戲：詞語配對、填缺字
+- 家園：用星星買寵物同裝飾，擺出／收起，摸一摸同餵零食
+- 答啱題目賺星星，星星可以喺商店花
 
 ## [0.1.0] — 2026-09-21
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Difficulty, Question } from '../types'
+import type { Difficulty, Question, Tone } from '../types'
 import { DIFFICULTY_LABEL } from '../types'
 import { playCorrect, playTap, playWin, playWrong, unlockAudio } from '../lib/audio'
 import { Confetti } from '../components/Confetti'
@@ -10,7 +10,7 @@ const TOTAL = 10
 
 type Props = {
   title: string
-  tone: 'mint' | 'coral' | 'grape'
+  tone: Tone
   hints: Record<Difficulty, string>
   muted: boolean
   makeQuestion: (difficulty: Difficulty) => Question
@@ -175,8 +175,28 @@ export function QuizGame({
           </p>
           <div className={`question-card ${shake ? 'shake' : ''}`}>
             <p className="prompt">{question.prompt}</p>
+            {question.speak && (
+              <button
+                type="button"
+                className="speak-btn"
+                onClick={() => {
+                  if (!window.speechSynthesis || !question.speak) return
+                  window.speechSynthesis.cancel()
+                  const utter = new SpeechSynthesisUtterance(question.speak)
+                  utter.lang = 'zh-HK'
+                  utter.rate = 0.85
+                  window.speechSynthesis.speak(utter)
+                }}
+              >
+                🔊 讀出嚟
+              </button>
+            )}
             {question.expression && (
-              <p className="expression">{question.expression}</p>
+              <p
+                className={`expression ${/[\u4e00-\u9fff]/.test(question.expression) ? 'han' : ''}`}
+              >
+                {question.expression}
+              </p>
             )}
             {question.input === 'number' && (
               <div className={`answer-box ${input ? '' : 'caret'}`}>{input}</div>
@@ -225,12 +245,14 @@ export function QuizGame({
           )}
 
           {question.input === 'choice' && (
-            <div className="choice-list">
+            <div
+              className={`choice-list ${question.choices?.every((c) => c.length <= 2) ? 'two-col' : ''}`}
+            >
               {question.choices?.map((choice) => (
                 <button
                   key={choice}
                   type="button"
-                  className="choice-btn"
+                  className={`choice-btn ${choice.length <= 2 ? 'han' : ''}`}
                   disabled={feedback === 'ok' || feedback === 'reveal'}
                   onClick={() => check(choice)}
                 >

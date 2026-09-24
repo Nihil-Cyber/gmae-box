@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import type { GameId, Screen, Stats } from './types'
+import type { GameId, QuizGameId, Screen, Stats } from './types'
 import { Home } from './components/Home'
 import { QuizGame } from './games/QuizGame'
 import { SudokuGame } from './games/SudokuGame'
+import { Garden } from './games/Garden'
 import { makeAddSub } from './lib/addSub'
 import { makeMulDiv } from './lib/mulDiv'
 import { makeOlympiad } from './lib/olympiad'
+import { makeReadChar, makeVocab } from './lib/words'
+import { tickGarden } from './lib/garden'
 import { loadStats, saveStats } from './lib/storage'
 import { unlockAudio } from './lib/audio'
 
@@ -27,6 +30,18 @@ const OLY_HINTS = {
   hard: '雞兔同籠、巧算、兩步應用題',
 }
 
+const READ_HINTS = {
+  easy: '日常單字，睇圖認字',
+  medium: '更多生活用字',
+  hard: '辨認相似字，好似土同士',
+}
+
+const VOCAB_HINTS = {
+  easy: '太陽、蘋果呢類常見詞',
+  medium: '學校、朋友等詞語',
+  hard: '較長詞語，仲要填缺字',
+}
+
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const [stats, setStats] = useState<Stats>(() => loadStats())
@@ -39,14 +54,14 @@ export default function App() {
     })
   }
 
-  function finishRound(game: 'addsub' | 'muldiv' | 'olympiad') {
+  function finishRound(game: QuizGameId) {
     commit((prev) => ({
       ...prev,
       [game]: { ...prev[game], rounds: prev[game].rounds + 1 },
     }))
   }
 
-  function firstTryCorrect(game: 'addsub' | 'muldiv' | 'olympiad') {
+  function firstTryCorrect(game: QuizGameId) {
     commit((prev) => ({
       ...prev,
       stars: prev.stars + 1,
@@ -66,6 +81,12 @@ export default function App() {
     }))
   }
 
+  function openGarden() {
+    unlockAudio()
+    commit((prev) => ({ ...prev, garden: tickGarden(prev.garden) }))
+    setScreen('garden')
+  }
+
   return (
     <div className="app">
       {screen === 'home' && (
@@ -75,6 +96,7 @@ export default function App() {
             unlockAudio()
             setScreen(id)
           }}
+          onGarden={openGarden}
           onToggleMute={() => commit((prev) => ({ ...prev, muted: !prev.muted }))}
         />
       )}
@@ -118,11 +140,50 @@ export default function App() {
         />
       )}
 
+      {screen === 'readchar' && (
+        <QuizGame
+          title="認一認字"
+          tone="rose"
+          hints={READ_HINTS}
+          muted={stats.muted}
+          makeQuestion={makeReadChar}
+          onBack={() => setScreen('home')}
+          onFirstTryCorrect={() => firstTryCorrect('readchar')}
+          onFinish={() => finishRound('readchar')}
+        />
+      )}
+
+      {screen === 'vocab' && (
+        <QuizGame
+          title="單字配對"
+          tone="amber"
+          hints={VOCAB_HINTS}
+          muted={stats.muted}
+          makeQuestion={makeVocab}
+          onBack={() => setScreen('home')}
+          onFirstTryCorrect={() => firstTryCorrect('vocab')}
+          onFinish={() => finishRound('vocab')}
+        />
+      )}
+
       {screen === 'sudoku' && (
         <SudokuGame
           muted={stats.muted}
           onBack={() => setScreen('home')}
           onWin={winSudoku}
+        />
+      )}
+
+      {screen === 'garden' && (
+        <Garden
+          stats={stats}
+          onBack={() => setScreen('home')}
+          onChange={(updater) => {
+            commit((prev) => {
+              const next = updater(prev.garden, prev.stars)
+              return { ...prev, garden: next.garden, stars: next.stars }
+            })
+          }}
         />
       )}
     </div>
