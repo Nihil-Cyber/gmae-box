@@ -68,6 +68,10 @@ button {
   -webkit-user-select: none;
 }
 
+.app:has(.g-shell) {
+  max-width: 920px;
+}
+
 .topbar {
   display: flex;
   align-items: center;
