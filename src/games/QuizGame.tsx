@@ -5,6 +5,7 @@ import { playCorrect, playTap, playWin, playWrong, unlockAudio } from '../lib/au
 import { Confetti } from '../components/Confetti'
 import { DifficultyPicker } from '../components/DifficultyPicker'
 import { NumberPad } from '../components/NumberPad'
+import { ShapeFigure } from '../components/ShapeFigure'
 
 const TOTAL = 10
 
@@ -191,6 +192,15 @@ export function QuizGame({
                 🔊 讀出嚟
               </button>
             )}
+            {question.figures && (
+              <div className="figure-pair" aria-hidden="true">
+                {question.figures.map((figure, i) => (
+                  <div key={`${figure.kind}-${i}`} className="figure-tile">
+                    <ShapeFigure figure={figure} />
+                  </div>
+                ))}
+              </div>
+            )}
             {question.expression && (
               <p
                 className={`expression ${/[\u4e00-\u9fff]/.test(question.expression) ? 'han' : ''}`}
@@ -241,6 +251,27 @@ export function QuizGame({
                   </small>
                 </button>
               ))}
+            </div>
+          )}
+
+          {question.input === 'same' && (
+            <div className="same-row">
+              <button
+                type="button"
+                className="same-btn yes"
+                disabled={feedback === 'ok' || feedback === 'reveal'}
+                onClick={() => check('一樣')}
+              >
+                一樣
+              </button>
+              <button
+                type="button"
+                className="same-btn no"
+                disabled={feedback === 'ok' || feedback === 'reveal'}
+                onClick={() => check('唔同')}
+              >
+                唔同
+              </button>
             </div>
           )}
 

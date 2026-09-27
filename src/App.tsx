@@ -1,16 +1,27 @@
 import { useState } from 'react'
-import type { GameId, QuizGameId, Screen, Stats } from './types'
+import type { Difficulty, GameId, QuizGameId, Screen, Stats } from './types'
 import { Home } from './components/Home'
 import { QuizGame } from './games/QuizGame'
 import { SudokuGame } from './games/SudokuGame'
 import { Garden } from './games/Garden'
+import { SmartSudokuGame } from './games/smartSudoku/SmartSudokuGame'
 import { makeAddSub } from './lib/addSub'
 import { makeMulDiv } from './lib/mulDiv'
 import { makeOlympiad } from './lib/olympiad'
 import { makeReadChar, makeVocab } from './lib/words'
+import { makeShapes } from './lib/shapes'
 import { tickGarden } from './lib/garden'
 import { loadStats, saveStats } from './lib/storage'
 import { unlockAudio } from './lib/audio'
+
+function localDay(offset = 0): string {
+  const d = new Date()
+  d.setDate(d.getDate() + offset)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
 
 const ADD_HINTS = {
   easy: '雙位數加減，暫時唔使進位／借位',
@@ -40,6 +51,12 @@ const VOCAB_HINTS = {
   easy: '太陽、蘋果呢類常見詞',
   medium: '學校、朋友等詞語',
   hard: '較長詞語，仲要填缺字',
+}
+
+const SHAPE_HINTS = {
+  easy: '兩個圖形一模一樣定明顯唔同',
+  medium: '同一個圖形可能轉咗方向',
+  hard: '好似嘅圖形要睇真啲',
 }
 
 export default function App() {
@@ -78,6 +95,41 @@ export default function App() {
       ...prev,
       stars: prev.stars + bonus,
       sudoku: { wins: prev.sudoku.wins + 1 },
+    }))
+  }
+
+  function winSmartSudoku(info: { difficulty: Difficulty; seconds: number }) {
+    commit((prev) => {
+      const today = localDay()
+      const last = prev.smartSudoku.lastWinDay
+      const streak =
+        last === today ? Math.max(1, prev.smartSudoku.streak) : last === localDay(-1) ? prev.smartSudoku.streak + 1 : 1
+      const bonus = info.difficulty === 'hard' ? 5 : info.difficulty === 'medium' ? 4 : 3
+      const bestTime =
+        prev.smartSudoku.bestTime == null
+          ? info.seconds
+          : Math.min(prev.smartSudoku.bestTime, info.seconds)
+      return {
+        ...prev,
+        stars: prev.stars + bonus,
+        smartSudoku: {
+          ...prev.smartSudoku,
+          completed: prev.smartSudoku.completed + 1,
+          easy: prev.smartSudoku.easy + (info.difficulty === 'easy' ? 1 : 0),
+          medium: prev.smartSudoku.medium + (info.difficulty === 'medium' ? 1 : 0),
+          hard: prev.smartSudoku.hard + (info.difficulty === 'hard' ? 1 : 0),
+          streak,
+          lastWinDay: today,
+          bestTime,
+        },
+      }
+    })
+  }
+
+  function recordSmartHint() {
+    commit((prev) => ({
+      ...prev,
+      smartSudoku: { ...prev.smartSudoku, hintsUsed: prev.smartSudoku.hintsUsed + 1 },
     }))
   }
 
@@ -166,11 +218,35 @@ export default function App() {
         />
       )}
 
+      {screen === 'shapes' && (
+        <QuizGame
+          title="圖形一樣"
+          tone="teal"
+          hints={SHAPE_HINTS}
+          muted={stats.muted}
+          makeQuestion={makeShapes}
+          onBack={() => setScreen('home')}
+          onFirstTryCorrect={() => firstTryCorrect('shapes')}
+          onFinish={() => finishRound('shapes')}
+        />
+      )}
+
       {screen === 'sudoku' && (
         <SudokuGame
           muted={stats.muted}
           onBack={() => setScreen('home')}
           onWin={winSudoku}
+        />
+      )}
+
+      {screen === 'smartSudoku' && (
+        <SmartSudokuGame
+          muted={stats.muted}
+          progress={stats.smartSudoku}
+          onBack={() => setScreen('home')}
+          onToggleMute={() => commit((prev) => ({ ...prev, muted: !prev.muted }))}
+          onWin={winSmartSudoku}
+          onHintUsed={recordSmartHint}
         />
       )}
 

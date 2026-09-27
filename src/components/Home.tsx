@@ -6,7 +6,7 @@ const GAMES: {
   title: string
   desc: string
   emoji: string
-  tone: 'mint' | 'coral' | 'grape' | 'sky' | 'rose' | 'amber'
+  tone: 'mint' | 'coral' | 'grape' | 'sky' | 'rose' | 'amber' | 'teal' | 'indigo'
 }[] = [
   {
     id: 'addsub',
@@ -35,6 +35,20 @@ const GAMES: {
     desc: '4 × 4 入門數獨',
     emoji: '🔢',
     tone: 'sky',
+  },
+  {
+    id: 'smartSudoku',
+    title: '智能數獨',
+    desc: '彩色 6 × 6，一樣唔重複',
+    emoji: '🧩',
+    tone: 'indigo',
+  },
+  {
+    id: 'shapes',
+    title: '圖形一樣',
+    desc: '睇兩個圖形，一樣定唔同',
+    emoji: '🔷',
+    tone: 'teal',
   },
   {
     id: 'readchar',
@@ -104,7 +118,9 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
           const extra =
             game.id === 'sudoku'
               ? `完成 ${stats.sudoku.wins} 局`
-              : `答啱 ${stats[game.id].firstTry} 題`
+              : game.id === 'smartSudoku'
+                ? `完成 ${stats.smartSudoku.completed} 局`
+                : `答啱 ${stats[game.id].firstTry} 題`
           return (
             <button
               key={game.id}
@@ -122,7 +138,7 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
           )
         })}
       </div>
-      <p className="home-foot">答啱題目賺星星，去家園買裝飾、養寵物。語文同數學都可以一齊練。</p>
+      <p className="home-foot">答啱題目賺星星，去家園買裝飾、養寵物。數學、語文同圖形都可以一齊練。</p>
     </section>
   )
 }

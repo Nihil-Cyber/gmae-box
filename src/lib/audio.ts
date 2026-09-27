@@ -42,6 +42,10 @@ export function playTap(): void {
   tone(520, 0.06, 'triangle', 0.05)
 }
 
+export function playPop(): void {
+  tone(698.46, 0.08, 'sine', 0.06)
+}
+
 export function playCorrect(): void {
   tone(523.25, 0.12, 'triangle', 0.08, 0)
   tone(659.25, 0.14, 'triangle', 0.08, 0.08)
