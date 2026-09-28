@@ -1,19 +1,36 @@
 import type { Difficulty, Question } from '../types'
 import { randInt } from './random'
 
+function singleDigitAdd(): { a: number; b: number } {
+  return { a: randInt(1, 9), b: randInt(1, 9) }
+}
+
+function singleDigitSub(): { a: number; b: number } {
+  const a = randInt(2, 9)
+  const b = randInt(1, a - 1)
+  return { a, b }
+}
+
+function within20Add(): { a: number; b: number } {
+  for (let i = 0; i < 24; i += 1) {
+    const a = randInt(1, 19)
+    const b = randInt(1, 20 - a)
+    if (a >= 10 || b >= 10 || a + b > 10) return { a, b }
+  }
+  return { a: 9, b: 8 }
+}
+
+function within20Sub(): { a: number; b: number } {
+  const a = randInt(10, 20)
+  const b = randInt(1, a - 1)
+  return { a, b }
+}
+
 function noCarryAdd(): { a: number; b: number } {
   const aOnes = randInt(0, 8)
   const bOnes = randInt(0, 9 - aOnes)
   const aTens = randInt(1, 8)
   const bTens = randInt(1, 9 - aTens)
-  return { a: aTens * 10 + aOnes, b: bTens * 10 + bOnes }
-}
-
-function carryAdd(): { a: number; b: number } {
-  const aOnes = randInt(1, 9)
-  const bOnes = randInt(10 - aOnes, 9)
-  const aTens = randInt(1, 9)
-  const bTens = randInt(1, 9)
   return { a: aTens * 10 + aOnes, b: bTens * 10 + bOnes }
 }
 
@@ -32,23 +49,10 @@ function noBorrowSub(): { a: number; b: number } {
   return { a, b }
 }
 
-function borrowSub(): { a: number; b: number } {
-  const aOnes = randInt(0, 8)
-  const bOnes = randInt(aOnes + 1, 9)
-  const aTens = randInt(2, 9)
-  const bTens = randInt(1, aTens - 1)
-  return { a: aTens * 10 + aOnes, b: bTens * 10 + bOnes }
-}
-
 function pair(difficulty: Difficulty, op: '+' | '-'): { a: number; b: number } {
-  if (op === '+') {
-    if (difficulty === 'easy') return noCarryAdd()
-    if (difficulty === 'hard') return carryAdd()
-    return Math.random() < 0.55 ? carryAdd() : noCarryAdd()
-  }
-  if (difficulty === 'easy') return noBorrowSub()
-  if (difficulty === 'hard') return borrowSub()
-  return Math.random() < 0.55 ? borrowSub() : noBorrowSub()
+  if (difficulty === 'easy') return op === '+' ? singleDigitAdd() : singleDigitSub()
+  if (difficulty === 'medium') return op === '+' ? within20Add() : within20Sub()
+  return op === '+' ? noCarryAdd() : noBorrowSub()
 }
 
 export function makeAddSub(difficulty: Difficulty): Question {

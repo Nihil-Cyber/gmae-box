@@ -1,20 +1,28 @@
 import type { Difficulty, Question } from '../types'
 import { randInt } from './random'
 
-function range(difficulty: Difficulty): { lo: number; hi: number } {
-  if (difficulty === 'easy') return { lo: 1, hi: 5 }
-  if (difficulty === 'hard') return { lo: 6, hi: 9 }
-  return { lo: 1, hi: 9 }
+function timesTableMul(): { x: number; y: number } {
+  return { x: randInt(1, 10), y: randInt(1, 10) }
+}
+
+function tableDiv(): { dividend: number; divisor: number; quotient: number } {
+  const divisor = randInt(1, 10)
+  const quotient = randInt(1, 10)
+  return { dividend: divisor * quotient, divisor, quotient }
+}
+
+function divAnswerBelow25(): { dividend: number; divisor: number; quotient: number } {
+  const divisor = randInt(2, 10)
+  const quotient = randInt(2, 24)
+  return { dividend: divisor * quotient, divisor, quotient }
 }
 
 export function makeMulDiv(difficulty: Difficulty): Question {
-  const { lo, hi } = range(difficulty)
-  const wantDiv =
-    difficulty === 'easy' ? Math.random() < 0.35 : Math.random() < 0.5
-  const x = randInt(lo, hi)
-  const y = randInt(lo, hi)
+  const wantMul =
+    difficulty === 'easy' ? true : difficulty === 'medium' ? Math.random() < 0.5 : Math.random() < 0.3
 
-  if (!wantDiv) {
+  if (wantMul) {
+    const { x, y } = timesTableMul()
     return {
       prompt: '乘出嚟係幾多？',
       expression: `${x} × ${y}`,
@@ -23,11 +31,12 @@ export function makeMulDiv(difficulty: Difficulty): Question {
     }
   }
 
-  const product = x * y
+  const { dividend, divisor, quotient } =
+    difficulty === 'hard' ? divAnswerBelow25() : tableDiv()
   return {
     prompt: '除出嚟係幾多？',
-    expression: `${product} ÷ ${x}`,
-    answer: y,
+    expression: `${dividend} ÷ ${divisor}`,
+    answer: quotient,
     input: 'number',
   }
 }

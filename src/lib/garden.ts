@@ -67,9 +67,41 @@ function clamp(n: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, n))
 }
 
-export function tickGarden(garden: GardenState, now = Date.now()): GardenState {
+export const MAX_PET_SLOTS = 4
+export const MAX_YARD_LEVEL = 3
+export const SLOT_COSTS = [12, 20, 32] as const
+export const YARD_COSTS = [10, 18, 28] as const
+
+export function nextSlotCost(slots: number): number | null {
+  if (slots >= MAX_PET_SLOTS) return null
+  return SLOT_COSTS[slots - 1] ?? null
+}
+
+export function nextYardCost(level: number): number | null {
+  if (level >= MAX_YARD_LEVEL) return null
+  return YARD_COSTS[level] ?? null
+}
+
+export function normalizeGarden(garden: Partial<GardenState> | GardenState): GardenState {
   const base = { ...emptyGarden(), ...garden }
-  if (!base.activePet) return { ...base, lastTick: now }
+  const owned = base.ownedPets.filter(Boolean)
+  const fromList = Array.isArray(base.placedPets) ? base.placedPets.filter((id) => owned.includes(id)) : []
+  const fallback = base.activePet && owned.includes(base.activePet) ? [base.activePet] : []
+  const petSlots = clamp(base.petSlots ?? 2, 1, MAX_PET_SLOTS)
+  const placedPets = (fromList.length ? fromList : fallback).slice(0, petSlots)
+  return {
+    ...base,
+    ownedPets: owned,
+    placedPets,
+    petSlots,
+    yardLevel: clamp(base.yardLevel ?? 0, 0, MAX_YARD_LEVEL),
+    activePet: placedPets.includes(base.activePet ?? '') ? base.activePet : (placedPets[0] ?? null),
+  }
+}
+
+export function tickGarden(garden: GardenState, now = Date.now()): GardenState {
+  const base = normalizeGarden(garden)
+  if (base.placedPets.length === 0) return { ...base, lastTick: now }
   const hours = Math.min(36, Math.max(0, (now - base.lastTick) / 3_600_000))
   if (hours < 0.02) return base
   return {
@@ -81,7 +113,7 @@ export function tickGarden(garden: GardenState, now = Date.now()): GardenState {
 }
 
 export function petMood(garden: GardenState): string {
-  if (!garden.activePet) return '去商店領養一隻寵物啦！'
+  if (garden.placedPets.length === 0) return '去商店領養一隻寵物啦！'
   if (garden.hunger < 25) return '肚餓喇，想食零食。'
   if (garden.happiness < 30) return '有啲悶，摸一摸佢啦。'
   if (garden.happiness > 75 && garden.hunger > 60) return '好開心，想同你玩！'

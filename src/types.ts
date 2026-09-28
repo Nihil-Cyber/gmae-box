@@ -52,7 +52,10 @@ export type GardenState = {
   ownedPets: string[]
   ownedDecor: string[]
   placedDecor: string[]
+  placedPets: string[]
   activePet: string | null
+  petSlots: number
+  yardLevel: number
   hunger: number
   happiness: number
   lastTick: number
@@ -111,7 +114,10 @@ export function emptyGarden(): GardenState {
     ownedPets: [],
     ownedDecor: [],
     placedDecor: [],
+    placedPets: [],
     activePet: null,
+    petSlots: 2,
+    yardLevel: 0,
     hunger: 80,
     happiness: 80,
     lastTick: Date.now(),

@@ -11,14 +11,14 @@ const GAMES: {
   {
     id: 'addsub',
     title: '加加減減',
-    desc: '雙位數加減法',
+    desc: '單數到雙位加減',
     emoji: '➕',
     tone: 'mint',
   },
   {
     id: 'muldiv',
     title: '乘乘除除',
-    desc: '九九乘法同除法',
+    desc: '1 到 10 乘數表同除法',
     emoji: '✖️',
     tone: 'coral',
   },
@@ -74,7 +74,7 @@ type Props = {
 }
 
 export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
-  const petHint = stats.garden.activePet
+  const petHint = stats.garden.placedPets.length > 0 || stats.garden.activePet
     ? '寵物喺度等你摸一摸'
     : '用星星領養寵物、換裝飾'
 
@@ -110,7 +110,7 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
           <h2>我嘅家園</h2>
           <p>{petHint}</p>
         </div>
-        <div className="meta">商店 · 寵物 · 裝飾</div>
+          <div className="meta">商店 · 寵物 · 裝飾 · 升級</div>
       </button>
 
       <div className="game-grid">

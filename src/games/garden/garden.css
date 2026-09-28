@@ -250,6 +250,34 @@
   min-width: 44px;
   min-height: 44px;
 }
+.g-pet.is-1-of-2 { left: 32%; }
+.g-pet.is-2-of-2 { left: 68%; }
+.g-pet.is-1-of-3 { left: 24%; }
+.g-pet.is-2-of-3 { left: 50%; }
+.g-pet.is-3-of-3 { left: 76%; }
+.g-pet.is-1-of-4 { left: 16%; }
+.g-pet.is-2-of-4 { left: 39%; }
+.g-pet.is-3-of-4 { left: 61%; }
+.g-pet.is-4-of-4 { left: 84%; }
+
+.g-theater.is-yard-1 { height: min(50vh, 428px); }
+.g-theater.is-yard-2 { height: min(54vh, 468px); }
+.g-theater.is-yard-3 { height: min(58vh, 508px); }
+.g-theater.is-yard-1 .g-hill,
+.g-theater.is-yard-2 .g-hill,
+.g-theater.is-yard-3 .g-hill { left: -14%; right: -14%; }
+.g-theater.is-yard-2 .g-hill-far,
+.g-theater.is-yard-3 .g-hill-far { height: 48%; }
+.g-theater.is-yard-3 .g-hill-mid { height: 40%; }
+
+.g-subtabs.is-three {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+.g-subtabs.is-three button { font-size: 15px; }
+
+.g-card-art.is-upgrade { background: #f7e3b5; }
+.g-upgrade-icon { font-size: 48px; line-height: 1; }
 
 .g-note {
   position: absolute;
@@ -565,7 +593,10 @@
     height: min(560px, 62vh);
     margin: 0 auto;
   }
-  .g-pet svg { width: 200px; height: 200px; }
+  .g-theater.is-yard-1 { width: min(640px, 100%); height: min(600px, 66vh); }
+  .g-theater.is-yard-2 { width: min(700px, 100%); height: min(640px, 70vh); }
+  .g-theater.is-yard-3 { width: min(760px, 100%); height: min(680px, 74vh); }
+  .g-pet.is-1-of-1 svg { width: 200px; height: 200px; }
   .g-care .toy-btn { min-height: 76px; }
   .g-meters {
     grid-template-columns: 1fr 1fr;

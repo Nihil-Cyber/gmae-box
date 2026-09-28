@@ -10,7 +10,7 @@ import { makeMulDiv } from './lib/mulDiv'
 import { makeOlympiad } from './lib/olympiad'
 import { makeReadChar, makeVocab } from './lib/words'
 import { makeShapes } from './lib/shapes'
-import { tickGarden } from './lib/garden'
+import { normalizeGarden, tickGarden } from './lib/garden'
 import { loadStats, saveStats } from './lib/storage'
 import { unlockAudio } from './lib/audio'
 
@@ -24,15 +24,15 @@ function localDay(offset = 0): string {
 }
 
 const ADD_HINTS = {
-  easy: '雙位數加減，暫時唔使進位／借位',
-  medium: '有時要進位或者借位',
-  hard: '幾乎每題都要進位或者借位',
+  easy: '單數加減，例如 3 + 5、9 − 4',
+  medium: '20 以內加減，例如 8 + 7、15 − 6',
+  hard: '雙位數加減，唔使進位／借位',
 }
 
 const MUL_HINTS = {
-  easy: '1 到 5 嘅乘法同除法',
-  medium: '完整九九，乘除都會出現',
-  hard: '6 到 9 嘅乘法同除法',
+  easy: '1 到 10 嘅乘數表',
+  medium: '1 到 10 乘法，同埋答案少過 25 嘅除法',
+  hard: '乘除都有，除法答案少過 25',
 }
 
 const OLY_HINTS = {
@@ -257,7 +257,7 @@ export default function App() {
           onChange={(updater) => {
             commit((prev) => {
               const next = updater(prev.garden, prev.stars)
-              return { ...prev, garden: next.garden, stars: next.stars }
+              return { ...prev, garden: normalizeGarden(next.garden), stars: next.stars }
             })
           }}
         />

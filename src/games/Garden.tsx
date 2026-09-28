@@ -4,6 +4,9 @@ import {
   PETS,
   type ShopItem,
   decorById,
+  nextSlotCost,
+  nextYardCost,
+  normalizeGarden,
   petById,
   petMood,
   tickGarden,
@@ -15,7 +18,7 @@ import { GardenTabs } from './garden/GardenTabs'
 import { GardenTopBar } from './garden/GardenTopBar'
 import { HabitatStage } from './garden/HabitatStage'
 import { PetBubble } from './garden/PetBubble'
-import { ShopPanel } from './garden/ShopPanel'
+import { ShopPanel, type ShopKind } from './garden/ShopPanel'
 import { isPetKind } from './garden/ids'
 import './garden/garden.css'
 
@@ -25,24 +28,25 @@ type Props = {
   onChange: (updater: (garden: GardenState, stars: number) => { garden: GardenState; stars: number }) => void
 }
 
+type Heart = { id: number; dx: number; slot: number }
+
 export function Garden({ stats, onBack, onChange }: Props) {
   const [tab, setTab] = useState<'scene' | 'shop'>('scene')
-  const [shopKind, setShopKind] = useState<'pets' | 'decor'>('pets')
+  const [shopKind, setShopKind] = useState<ShopKind>('pets')
   const [toast, setToast] = useState('')
   const [petMoodFx, setPetMoodFx] = useState<'normal' | 'happy'>('normal')
   const [patting, setPatting] = useState(false)
   const [feeding, setFeeding] = useState(false)
   const [feedShake, setFeedShake] = useState(false)
-  const [hearts, setHearts] = useState<Array<{ id: number; dx: number }>>([])
+  const [hearts, setHearts] = useState<Heart[]>([])
   const [leaving, setLeaving] = useState<string[]>([])
   const [entering, setEntering] = useState<string[]>([])
   const [flashId, setFlashId] = useState<string | null>(null)
   const [shakeId, setShakeId] = useState<string | null>(null)
   const heartSeq = useRef(0)
   const garden = useMemo(() => tickGarden(stats.garden), [stats.garden])
-  const pet = garden.activePet ? petById(garden.activePet) : undefined
+  const placed = garden.placedPets.filter(isPetKind)
   const muted = stats.muted
-  const petKind = garden.activePet && isPetKind(garden.activePet) ? garden.activePet : undefined
 
   function tap() {
     if (muted) return
@@ -62,7 +66,18 @@ export function Garden({ stats, onBack, onChange }: Props) {
     window.setTimeout(() => setToast(''), 1400)
   }
 
-  function buy(item: ShopItem, kind: 'pets' | 'decor') {
+  function commit(updater: (g: GardenState, stars: number) => { garden: GardenState; stars: number }) {
+    onChange((g, stars) => {
+      const next = updater(normalizeGarden(g), stars)
+      return { garden: normalizeGarden(next.garden), stars: next.stars }
+    })
+  }
+
+  function buy(item: ShopItem, kind: ShopKind) {
+    if (kind === 'upgrade') {
+      buyUpgrade(item.id)
+      return
+    }
     if (stats.stars < item.cost) {
       beep(false)
       setShakeId(item.id)
@@ -70,17 +85,20 @@ export function Garden({ stats, onBack, onChange }: Props) {
       note('星星唔夠呀')
       return
     }
-    onChange((g, stars) => {
+    commit((g, stars) => {
       if (kind === 'pets') {
         if (g.ownedPets.includes(item.id)) return { garden: g, stars }
+        const canPlace = g.placedPets.length < g.petSlots
+        const firstOut = g.placedPets.length === 0 && canPlace
         return {
           stars: stars - item.cost,
           garden: {
             ...g,
             ownedPets: [...g.ownedPets, item.id],
-            activePet: g.activePet ?? item.id,
-            hunger: g.activePet ? g.hunger : 80,
-            happiness: g.activePet ? g.happiness : 80,
+            placedPets: canPlace ? [...g.placedPets, item.id] : g.placedPets,
+            activePet: canPlace ? (g.activePet ?? item.id) : g.activePet,
+            hunger: firstOut ? 80 : g.hunger,
+            happiness: firstOut ? 80 : g.happiness,
           },
         }
       }
@@ -103,19 +121,98 @@ export function Garden({ stats, onBack, onChange }: Props) {
     setFlashId(item.id)
     window.setTimeout(() => setFlashId(null), 700)
     beep(true)
+    if (kind === 'pets' && garden.placedPets.length >= garden.petSlots) {
+      note(`買咗${item.name}！家園位滿喇，去升級先可以帶出嚟`)
+      return
+    }
     note(`買咗${item.name}！`)
   }
 
-  function setActivePet(id: string) {
-    onChange((g, stars) => ({
-      stars,
-      garden: { ...g, activePet: id },
-    }))
+  function buyUpgrade(id: string) {
+    if (id === 'upgrade-slots') {
+      const cost = nextSlotCost(garden.petSlots)
+      if (cost == null) {
+        note('已經係最多隻喇')
+        return
+      }
+      if (stats.stars < cost) {
+        beep(false)
+        setShakeId(id)
+        window.setTimeout(() => setShakeId(null), 400)
+        note('星星唔夠呀')
+        return
+      }
+      const nextSlots = garden.petSlots + 1
+      commit((g, stars) => ({
+        stars: stars - cost,
+        garden: { ...g, petSlots: g.petSlots + 1 },
+      }))
+      setFlashId(id)
+      window.setTimeout(() => setFlashId(null), 700)
+      beep(true)
+      note(`而家可以同時 ${nextSlots} 隻一齊玩！`)
+      return
+    }
+    if (id === 'upgrade-yard') {
+      const cost = nextYardCost(garden.yardLevel)
+      if (cost == null) {
+        note('草地已經係最大喇')
+        return
+      }
+      if (stats.stars < cost) {
+        beep(false)
+        setShakeId(id)
+        window.setTimeout(() => setShakeId(null), 400)
+        note('星星唔夠呀')
+        return
+      }
+      commit((g, stars) => ({
+        stars: stars - cost,
+        garden: { ...g, yardLevel: g.yardLevel + 1 },
+      }))
+      setFlashId(id)
+      window.setTimeout(() => setFlashId(null), 700)
+      beep(true)
+      note('家園闊咗一格！')
+    }
+  }
+
+  function togglePet(id: string) {
+    if (garden.placedPets.includes(id)) {
+      commit((g, stars) => {
+        const placedPets = g.placedPets.filter((x) => x !== id)
+        return {
+          stars,
+          garden: { ...g, placedPets, activePet: placedPets[0] ?? null },
+        }
+      })
+      tap()
+      return
+    }
+    if (garden.placedPets.length >= garden.petSlots) {
+      beep(false)
+      note(`而家最多 ${garden.petSlots} 隻一齊玩，去商店升級啦`)
+      return
+    }
+    commit((g, stars) => {
+      const firstOut = g.placedPets.length === 0
+      const placedPets = [...g.placedPets, id]
+      return {
+        stars,
+        garden: {
+          ...g,
+          placedPets,
+          activePet: g.activePet ?? id,
+          hunger: firstOut ? 80 : g.hunger,
+          happiness: firstOut ? 80 : g.happiness,
+        },
+      }
+    })
     tap()
   }
 
   function showDecor(id: string) {
-    onChange((g, stars) => {
+    commit((g, stars) => {
       if (g.placedDecor.includes(id)) return { stars, garden: g }
       return { stars, garden: { ...g, placedDecor: [...g.placedDecor, id] } }
     })
@@ -134,14 +231,14 @@ export function Garden({ stats, onBack, onChange }: Props) {
 
   function finishLeave(id: string) {
     setLeaving((prev) => prev.filter((x) => x !== id))
-    onChange((g, stars) => ({
+    commit((g, stars) => ({
       stars,
       garden: { ...g, placedDecor: g.placedDecor.filter((x) => x !== id) },
     }))
   }
 
   function feed() {
-    if (!garden.activePet) return
+    if (placed.length === 0) return
     if (stats.stars < 1) {
       beep(false)
       setFeedShake(true)
@@ -151,7 +248,7 @@ export function Garden({ stats, onBack, onChange }: Props) {
     }
     setFeeding(true)
     window.setTimeout(() => {
-      onChange((g, stars) => ({
+      commit((g, stars) => ({
         stars: stars - 1,
         garden: {
           ...g,
@@ -173,8 +270,8 @@ export function Garden({ stats, onBack, onChange }: Props) {
   }
 
   function petPlay() {
-    if (!garden.activePet) return
-    onChange((g, stars) => ({
+    if (placed.length === 0) return
+    commit((g, stars) => ({
       stars,
       garden: {
         ...g,
@@ -186,9 +283,10 @@ export function Garden({ stats, onBack, onChange }: Props) {
     setPetMoodFx('happy')
     setHearts((prev) => [
       ...prev,
-      { id: ++heartSeq.current, dx: -18 },
-      { id: ++heartSeq.current, dx: 6 },
-      { id: ++heartSeq.current, dx: 22 },
+      ...placed.flatMap((_, slot) => [
+        { id: ++heartSeq.current, dx: -14, slot },
+        { id: ++heartSeq.current, dx: 16, slot },
+      ]),
     ])
     window.setTimeout(() => {
       setPatting(false)
@@ -201,6 +299,8 @@ export function Garden({ stats, onBack, onChange }: Props) {
   const groundItems = garden.placedDecor.filter((id) => decorById(id)?.layer !== 'sky')
   const cheapest = PETS.filter((p) => !garden.ownedPets.includes(p.id)).sort((a, b) => a.cost - b.cost)[0]
   const canAdopt = Boolean(cheapest && stats.stars >= cheapest.cost)
+  const names = placed.map((id) => petById(id)?.name).filter(Boolean) as string[]
+  const bubbleName = names.length <= 1 ? (names[0] ?? '寵物') : names.length === 2 ? `${names[0]}同${names[1]}` : `${names.slice(0, -1).join('、')}同${names[names.length - 1]}`
 
   return (
     <section className="g-shell">
@@ -211,8 +311,8 @@ export function Garden({ stats, onBack, onChange }: Props) {
         <>
           <HabitatStage
             happySky={garden.happiness > 70}
-            empty={!pet}
-            petKind={petKind}
+            yardLevel={garden.yardLevel}
+            pets={placed}
             petMood={petMoodFx}
             petPatting={patting}
             skyItems={skyItems}
@@ -220,26 +320,30 @@ export function Garden({ stats, onBack, onChange }: Props) {
             leaving={leaving}
             entering={entering}
             hearts={hearts}
-            onPet={petPlay}
+            onPet={() => petPlay()}
             onHideDecor={hideDecor}
             onHeartEnd={(id) => setHearts((prev) => prev.filter((h) => h.id !== id))}
             onLeaveEnd={finishLeave}
           />
-          {pet && petKind && (
+          {placed.length > 0 && (
             <>
-              <PetBubble name={pet.name} line={petMood(garden)} />
+              <PetBubble name={bubbleName} line={petMood(garden)} />
               <CareMeters hunger={garden.hunger} happiness={garden.happiness} />
               <CareButtons feeding={feeding} shaking={feedShake} onPat={petPlay} onFeed={feed} />
             </>
           )}
-          {!pet && (
+          {placed.length === 0 && (
             <div className="g-empty-card">
-              {canAdopt ? `你有 ⭐${stats.stars}，夠領養${cheapest?.name}喇！` : '去玩遊戲賺星星，就可以領養啦！'}
+              {garden.ownedPets.length > 0
+                ? '寵物喺商店等你帶出嚟玩。'
+                : canAdopt
+                  ? `你有 ⭐${stats.stars}，夠領養${cheapest?.name}喇！`
+                  : '去玩遊戲賺星星，就可以領養啦！'}
               <button
                 type="button"
                 className="toy-btn toy-btn--honey"
                 onClick={() => {
-                  if (canAdopt) {
+                  if (garden.ownedPets.length > 0 || canAdopt) {
                     setTab('shop')
                     setShopKind('pets')
                     return
@@ -247,7 +351,7 @@ export function Garden({ stats, onBack, onChange }: Props) {
                   onBack()
                 }}
               >
-                {canAdopt ? '去商店揀寵物' : '去玩遊戲賺星星'}
+                {garden.ownedPets.length > 0 ? '去商店帶寵物出嚟' : canAdopt ? '去商店揀寵物' : '去玩遊戲賺星星'}
               </button>
             </div>
           )}
@@ -261,13 +365,15 @@ export function Garden({ stats, onBack, onChange }: Props) {
           ownedPets={garden.ownedPets}
           ownedDecor={garden.ownedDecor}
           placedDecor={garden.placedDecor}
-          activePet={garden.activePet}
+          placedPets={garden.placedPets}
+          petSlots={garden.petSlots}
+          yardLevel={garden.yardLevel}
           flashId={flashId}
           shakeId={shakeId}
           onKind={setShopKind}
-          onBuy={(item) => buy(item, shopKind)}
+          onBuy={buy}
           onUse={(item) => {
-            if (shopKind === 'pets') setActivePet(item.id)
+            if (shopKind === 'pets') togglePet(item.id)
             else if (garden.placedDecor.includes(item.id)) hideDecor(item.id)
             else showDecor(item.id)
           }}
