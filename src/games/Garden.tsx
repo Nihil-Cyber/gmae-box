@@ -1,8 +1,9 @@
 import { useMemo, useRef, useState } from 'react'
-import type { GardenState, Stats } from '../types'
+import type { GardenSpot, GardenState, Stats } from '../types'
 import {
   PETS,
   type ShopItem,
+  clampSpot,
   decorById,
   nextSlotCost,
   nextYardCost,
@@ -28,7 +29,7 @@ type Props = {
   onChange: (updater: (garden: GardenState, stars: number) => { garden: GardenState; stars: number }) => void
 }
 
-type Heart = { id: number; dx: number; slot: number }
+type Heart = { id: number; dx: number; petId: string }
 
 export function Garden({ stats, onBack, onChange }: Props) {
   const [tab, setTab] = useState<'scene' | 'shop'>('scene')
@@ -211,6 +212,27 @@ export function Garden({ stats, onBack, onChange }: Props) {
     tap()
   }
 
+  function movePet(id: string, spot: GardenSpot) {
+    commit((g, stars) => ({
+      stars,
+      garden: {
+        ...g,
+        petSpots: { ...g.petSpots, [id]: clampSpot(spot, 'pet', g.yardLevel) },
+      },
+    }))
+  }
+
+  function moveDecor(id: string, spot: GardenSpot) {
+    const kind = decorById(id)?.layer === 'sky' ? 'sky' : 'ground'
+    commit((g, stars) => ({
+      stars,
+      garden: {
+        ...g,
+        decorSpots: { ...g.decorSpots, [id]: clampSpot(spot, kind, g.yardLevel) },
+      },
+    }))
+  }
+
   function showDecor(id: string) {
     commit((g, stars) => {
       if (g.placedDecor.includes(id)) return { stars, garden: g }
@@ -283,9 +305,9 @@ export function Garden({ stats, onBack, onChange }: Props) {
     setPetMoodFx('happy')
     setHearts((prev) => [
       ...prev,
-      ...placed.flatMap((_, slot) => [
-        { id: ++heartSeq.current, dx: -14, slot },
-        { id: ++heartSeq.current, dx: 16, slot },
+      ...placed.flatMap((petId) => [
+        { id: ++heartSeq.current, dx: -14, petId },
+        { id: ++heartSeq.current, dx: 16, petId },
       ]),
     ])
     window.setTimeout(() => {
@@ -313,8 +335,11 @@ export function Garden({ stats, onBack, onChange }: Props) {
             happySky={garden.happiness > 70}
             yardLevel={garden.yardLevel}
             pets={placed}
+            petSpots={garden.petSpots}
+            decorSpots={garden.decorSpots}
             petMood={petMoodFx}
             petPatting={patting}
+            wanderPaused={patting || feeding}
             skyItems={skyItems}
             groundItems={groundItems}
             leaving={leaving}
@@ -322,9 +347,14 @@ export function Garden({ stats, onBack, onChange }: Props) {
             hearts={hearts}
             onPet={() => petPlay()}
             onHideDecor={hideDecor}
+            onMovePet={movePet}
+            onMoveDecor={moveDecor}
             onHeartEnd={(id) => setHearts((prev) => prev.filter((h) => h.id !== id))}
             onLeaveEnd={finishLeave}
           />
+          {(placed.length > 0 || garden.placedDecor.length > 0) && (
+            <p className="g-hint">拖寵物同裝飾可以搬位；撳寵物係摸一摸，撳裝飾就收起。</p>
+          )}
           {placed.length > 0 && (
             <>
               <PetBubble name={bubbleName} line={petMood(garden)} />

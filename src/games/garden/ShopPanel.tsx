@@ -42,7 +42,7 @@ export function ShopPanel({
   onBuy,
   onUse,
 }: Props) {
-  const slotCost = nextSlotCost(petSlots) ?? 32
+  const slotCost = nextSlotCost(petSlots) ?? 52
   const yardCost = nextYardCost(yardLevel) ?? 28
   const upgrades: ShopItem[] = [
     {

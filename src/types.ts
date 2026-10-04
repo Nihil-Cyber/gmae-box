@@ -48,11 +48,18 @@ export type QuizStat = {
   questions: number
 }
 
+export type GardenSpot = {
+  x: number
+  y: number
+}
+
 export type GardenState = {
   ownedPets: string[]
   ownedDecor: string[]
   placedDecor: string[]
   placedPets: string[]
+  petSpots: Record<string, GardenSpot>
+  decorSpots: Record<string, GardenSpot>
   activePet: string | null
   petSlots: number
   yardLevel: number
@@ -115,6 +122,8 @@ export function emptyGarden(): GardenState {
     ownedDecor: [],
     placedDecor: [],
     placedPets: [],
+    petSpots: {},
+    decorSpots: {},
     activePet: null,
     petSlots: 2,
     yardLevel: 0,

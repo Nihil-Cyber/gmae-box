@@ -42,7 +42,7 @@
 .pet-eyes { transition: opacity 120ms ease-out; }
 
 /* 心心 / 茸毛粒子：用 --dx 控制飄去邊 */
-.heart-pop { position: absolute; pointer-events: none; animation: heart-pop 900ms ease-out forwards; }
+.heart-pop { position: absolute; pointer-events: none; translate: -50% 0; animation: heart-pop 900ms ease-out forwards; }
 @keyframes heart-pop {
   0%   { opacity: 0; transform: translate(0, 0) scale(0.4); }
   20%  { opacity: 1; transform: translate(0, -8px) scale(1); }
@@ -104,6 +104,7 @@
   .heart-pop, .snack-x, .snack-y { animation-duration: 1ms; }
   .toast-pop { animation: none; opacity: 1; transform: translate(-50%, 0); }
   .meter-fill { transition: none; }
+  .g-pet-shift { transition: none; }
 }
 
 /* ---------- 版面 ---------- */
@@ -201,6 +202,7 @@
   height: 100%;
   overflow: hidden;
   border-radius: 22px;
+  user-select: none;
 }
 
 .g-scene.is-happy { background: #c6e5f3; }
@@ -234,31 +236,47 @@
   padding: 0;
   min-width: 44px;
   min-height: 44px;
+  translate: -50% -50%;
+  touch-action: none;
+  cursor: grab;
   filter: drop-shadow(0 4px 0 rgb(43 33 24 / 12%));
 }
 
 .g-deco.is-sky { z-index: 1; }
 .g-pet {
   position: absolute;
-  left: 50%;
-  bottom: 10%;
   z-index: 3;
-  translate: -50% 0;
+  translate: -50% -72%;
   border: 0;
   background: transparent;
   padding: 0;
   min-width: 44px;
   min-height: 44px;
+  touch-action: none;
+  cursor: grab;
 }
-.g-pet.is-1-of-2 { left: 32%; }
-.g-pet.is-2-of-2 { left: 68%; }
-.g-pet.is-1-of-3 { left: 24%; }
-.g-pet.is-2-of-3 { left: 50%; }
-.g-pet.is-3-of-3 { left: 76%; }
-.g-pet.is-1-of-4 { left: 16%; }
-.g-pet.is-2-of-4 { left: 39%; }
-.g-pet.is-3-of-4 { left: 61%; }
-.g-pet.is-4-of-4 { left: 84%; }
+.g-pet.is-dragging,
+.g-deco.is-dragging {
+  z-index: 8;
+  cursor: grabbing;
+  filter: drop-shadow(0 10px 0 rgb(43 33 24 / 16%));
+}
+.g-scene.is-hold { cursor: grabbing; }
+.g-pet-shift {
+  display: block;
+  transform-origin: 50% 80%;
+  transition: transform 1.7s ease-in-out;
+}
+.g-pet-face { display: block; transform-origin: 50% 80%; }
+.g-pet.is-dragging .g-pet-shift { transition: none; }
+
+.g-hint {
+  margin: 10px 8px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6b5540;
+}
 
 .g-theater.is-yard-1 { height: min(50vh, 428px); }
 .g-theater.is-yard-2 { height: min(54vh, 468px); }
@@ -596,7 +614,7 @@
   .g-theater.is-yard-1 { width: min(640px, 100%); height: min(600px, 66vh); }
   .g-theater.is-yard-2 { width: min(700px, 100%); height: min(640px, 70vh); }
   .g-theater.is-yard-3 { width: min(760px, 100%); height: min(680px, 74vh); }
-  .g-pet.is-1-of-1 svg { width: 200px; height: 200px; }
+  .g-pet.is-solo svg { width: 200px; height: 200px; }
   .g-care .toy-btn { min-height: 76px; }
   .g-meters {
     grid-template-columns: 1fr 1fr;

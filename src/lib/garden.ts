@@ -1,4 +1,4 @@
-import type { GardenState } from '../types'
+import type { GardenSpot, GardenState } from '../types'
 import { emptyGarden } from '../types'
 
 export type ShopItem = {
@@ -67,10 +67,67 @@ function clamp(n: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, n))
 }
 
-export const MAX_PET_SLOTS = 4
+export const MAX_PET_SLOTS = 6
 export const MAX_YARD_LEVEL = 3
-export const SLOT_COSTS = [12, 20, 32] as const
+export const SLOT_COSTS = [12, 20, 32, 40, 52] as const
 export const YARD_COSTS = [10, 18, 28] as const
+
+const PET_XS: Record<number, number[]> = {
+  1: [50],
+  2: [32, 68],
+  3: [24, 50, 76],
+  4: [18, 39, 61, 82],
+  5: [14, 32, 50, 68, 86],
+  6: [12, 28, 44, 60, 76, 88],
+}
+
+export function isSpot(value: unknown): value is GardenSpot {
+  return Boolean(
+    value &&
+      typeof value === 'object' &&
+      typeof (value as GardenSpot).x === 'number' &&
+      Number.isFinite((value as GardenSpot).x) &&
+      typeof (value as GardenSpot).y === 'number' &&
+      Number.isFinite((value as GardenSpot).y),
+  )
+}
+
+export function defaultDecorSpot(id: string): GardenSpot {
+  const spot = DECOR_SPOT[id]
+  if (!spot) return { x: 50, y: 70 }
+  return { x: Number.parseFloat(spot.left), y: Number.parseFloat(spot.top) }
+}
+
+export function defaultPetSpot(index: number, total: number): GardenSpot {
+  const n = Math.min(6, Math.max(1, total))
+  const xs = PET_XS[n] ?? PET_XS[1]
+  const x = xs[Math.min(Math.max(0, index), xs.length - 1)] ?? 50
+  return { x, y: 74 + (index % 2) * 6 }
+}
+
+export function clampSpot(spot: GardenSpot, kind: 'pet' | 'sky' | 'ground', yardLevel = 0): GardenSpot {
+  const extra = clamp(yardLevel, 0, MAX_YARD_LEVEL) * 1.4
+  if (kind === 'sky') return { x: clamp(spot.x, 8, 92), y: clamp(spot.y, 6, 34 + extra) }
+  if (kind === 'pet') return { x: clamp(spot.x, 10, 90), y: clamp(spot.y, 52 - extra, 86) }
+  return { x: clamp(spot.x, 8, 92), y: clamp(spot.y, 42 - extra, 88) }
+}
+
+function cleanSpots(
+  raw: Record<string, GardenSpot> | undefined,
+  ids: string[],
+  kindFor: (id: string) => 'pet' | 'sky' | 'ground',
+  fallback: (id: string, index: number) => GardenSpot,
+  yardLevel: number,
+): Record<string, GardenSpot> {
+  const next: Record<string, GardenSpot> = {}
+  for (const [id, spot] of Object.entries(raw ?? {})) {
+    if (isSpot(spot)) next[id] = clampSpot(spot, kindFor(id), yardLevel)
+  }
+  ids.forEach((id, index) => {
+    if (!isSpot(next[id])) next[id] = clampSpot(fallback(id, index), kindFor(id), yardLevel)
+  })
+  return next
+}
 
 export function nextSlotCost(slots: number): number | null {
   if (slots >= MAX_PET_SLOTS) return null
@@ -87,14 +144,31 @@ export function normalizeGarden(garden: Partial<GardenState> | GardenState): Gar
   const owned = base.ownedPets.filter(Boolean)
   const fromList = Array.isArray(base.placedPets) ? base.placedPets.filter((id) => owned.includes(id)) : []
   const fallback = base.activePet && owned.includes(base.activePet) ? [base.activePet] : []
-  const petSlots = clamp(base.petSlots ?? 2, 1, MAX_PET_SLOTS)
+  const petSlots = clamp(base.petSlots ?? 2, 2, MAX_PET_SLOTS)
   const placedPets = (fromList.length ? fromList : fallback).slice(0, petSlots)
+  const yardLevel = clamp(base.yardLevel ?? 0, 0, MAX_YARD_LEVEL)
+  const placedDecor = base.placedDecor.filter((id) => base.ownedDecor.includes(id) && Boolean(decorById(id)))
   return {
     ...base,
     ownedPets: owned,
     placedPets,
+    placedDecor,
     petSlots,
-    yardLevel: clamp(base.yardLevel ?? 0, 0, MAX_YARD_LEVEL),
+    yardLevel,
+    petSpots: cleanSpots(
+      base.petSpots,
+      placedPets,
+      () => 'pet',
+      (_id, index) => defaultPetSpot(index, placedPets.length),
+      yardLevel,
+    ),
+    decorSpots: cleanSpots(
+      base.decorSpots,
+      placedDecor,
+      (id) => (decorById(id)?.layer === 'sky' ? 'sky' : 'ground'),
+      (id) => defaultDecorSpot(id),
+      yardLevel,
+    ),
     activePet: placedPets.includes(base.activePet ?? '') ? base.activePet : (placedPets[0] ?? null),
   }
 }
