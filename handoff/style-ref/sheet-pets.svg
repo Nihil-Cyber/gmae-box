@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 760 140" width="1520" height="280">
+  <rect width="760" height="140" fill="#F6E7C1"/>
+  <image href="pets/chick-normal.svg" x="10" y="10" width="120" height="120"/>
+  <image href="pets/rabbit-normal.svg" x="130" y="10" width="120" height="120"/>
+  <image href="pets/cat-normal.svg" x="250" y="10" width="120" height="120"/>
+  <image href="pets/dog-normal.svg" x="370" y="10" width="120" height="120"/>
+  <image href="pets/panda-normal.svg" x="490" y="10" width="120" height="120"/>
+  <image href="pets/dragon-normal.svg" x="610" y="10" width="120" height="120"/>
+</svg>

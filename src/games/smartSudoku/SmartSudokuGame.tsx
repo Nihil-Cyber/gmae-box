@@ -17,6 +17,7 @@ import {
 } from '../../lib/smartSudoku'
 import { playPop, playTap, playWin, playWrong, unlockAudio } from '../../lib/audio'
 import { Confetti } from '../../components/Confetti'
+import { IconSprite, StarMark } from '../../components/IconSprite'
 import { DifficultyPicker } from '../../components/DifficultyPicker'
 import { NumberTray } from './NumberTray'
 import { SudokuBoard } from './SudokuBoard'
@@ -237,7 +238,7 @@ export function SmartSudokuGame({
       <Confetti show={phase === 'win'} />
       <div className="ss-top">
         <button type="button" className="icon-btn" onClick={onBack} aria-label="返回">
-          ←
+          <IconSprite kind="icon-back" size={26} />
         </button>
         <h2>智能數獨</h2>
         <button
@@ -246,7 +247,7 @@ export function SmartSudokuGame({
           onClick={onToggleMute}
           aria-label={muted ? '開啟聲音' : '關閉聲音'}
         >
-          {muted ? '🔇' : '🔊'}
+          <IconSprite kind={muted ? 'icon-mute' : 'icon-sound'} size={26} />
         </button>
       </div>
 
@@ -263,7 +264,9 @@ export function SmartSudokuGame({
       {phase !== 'setup' && (
         <>
           <div className="ss-meta">
-            <span className="ss-chip">⭐ {progress.completed}</span>
+            <span className="ss-chip">
+              <StarMark size={16} /> {progress.completed}
+            </span>
             <span className="ss-chip">
               {DIFFICULTY_LABEL[difficulty]} · {clues} 格
             </span>

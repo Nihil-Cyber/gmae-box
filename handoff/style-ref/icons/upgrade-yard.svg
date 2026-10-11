@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="家園擴建">
+  <ellipse cx="64" cy="112" rx="58" ry="6" fill="#2B2118" opacity="0.13" />
+  <path d="M8 104 Q8 92 20 88 Q64 40 108 88 Q120 92 120 104 Z" fill="#7CBF8C" />
+  <path d="M24 104 Q36 62 74 66 Q100 70 108 104 Z" fill="#9ED4AC" />
+  <ellipse cx="54" cy="74" rx="10" ry="4" fill="#FFFFFF" opacity="0.4" transform="rotate(-20 54 74)" />
+  <path d="M64 62 V30" stroke="#9C6B45" stroke-width="4" stroke-linecap="round" />
+  <path d="M66 30 L88 37 L66 44 Z" fill="#D9784F" stroke="#D9784F" stroke-width="3" stroke-linejoin="round" />
+  <g fill="none" stroke="#F2B04A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 60 L10 70 L20 80" /><path d="M108 60 L118 70 L108 80" /></g>
+</svg>

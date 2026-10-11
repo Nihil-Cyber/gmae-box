@@ -20,6 +20,7 @@ import { GardenTopBar } from './garden/GardenTopBar'
 import { HabitatStage } from './garden/HabitatStage'
 import { PetBubble } from './garden/PetBubble'
 import { ShopPanel, type ShopKind } from './garden/ShopPanel'
+import { StarMark } from '../components/IconSprite'
 import { isPetKind } from './garden/ids'
 import './garden/garden.css'
 
@@ -367,7 +368,12 @@ export function Garden({ stats, onBack, onChange }: Props) {
               {garden.ownedPets.length > 0
                 ? '寵物喺商店等你帶出嚟玩。'
                 : canAdopt
-                  ? `你有 ⭐${stats.stars}，夠領養${cheapest?.name}喇！`
+                  ? (
+                    <>
+                      你有 <StarMark size={18} />
+                      {stats.stars}，夠領養{cheapest?.name}喇！
+                    </>
+                  )
                   : '去玩遊戲賺星星，就可以領養啦！'}
               <button
                 type="button"

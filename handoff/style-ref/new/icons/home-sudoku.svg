@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="四宮數獨">
+  <ellipse cx="128" cy="230" rx="96" ry="10" fill="#2B2118" opacity="0.13" />
+  <g transform="translate(0 9)"><rect x="44" y="36" width="168" height="168" rx="24" fill="#E2D2B8" /></g><rect x="44" y="36" width="168" height="168" rx="24" fill="#FFFDF8" />
+  <path d="M88 44 V196 M168 44 V196 M52 80 H204 M52 160 H204" stroke="#E2D2B8" stroke-width="3" stroke-linecap="round" />
+  <path d="M128 44 V196 M52 120 H204" stroke="#2B78B5" stroke-width="5" stroke-linecap="round" />
+  <circle cx="68" cy="60" r="4.6" fill="#E24C3B" />
+  <circle cx="140" cy="52" r="4.6" fill="#5A4A8A" /><circle cx="148" cy="60" r="4.6" fill="#5A4A8A" /><circle cx="156" cy="68" r="4.6" fill="#5A4A8A" />
+  <circle cx="101" cy="93" r="4.6" fill="#D9784F" /><circle cx="115" cy="93" r="4.6" fill="#D9784F" /><circle cx="101" cy="107" r="4.6" fill="#D9784F" /><circle cx="115" cy="107" r="4.6" fill="#D9784F" />
+  <circle cx="181" cy="93" r="4.6" fill="#2B78B5" /><circle cx="195" cy="107" r="4.6" fill="#2B78B5" />
+  <circle cx="61" cy="133" r="4.6" fill="#2B78B5" /><circle cx="75" cy="147" r="4.6" fill="#2B78B5" />
+  <circle cx="141" cy="133" r="4.6" fill="#D9784F" /><circle cx="155" cy="133" r="4.6" fill="#D9784F" /><circle cx="141" cy="147" r="4.6" fill="#D9784F" /><circle cx="155" cy="147" r="4.6" fill="#D9784F" />
+  <circle cx="100" cy="172" r="4.6" fill="#5A4A8A" /><circle cx="108" cy="180" r="4.6" fill="#5A4A8A" /><circle cx="116" cy="188" r="4.6" fill="#5A4A8A" />
+  <circle cx="188" cy="180" r="4.6" fill="#E24C3B" />
+</svg>

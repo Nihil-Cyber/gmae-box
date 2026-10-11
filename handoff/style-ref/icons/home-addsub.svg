@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="加加減減">
+  <ellipse cx="128" cy="228" rx="96" ry="10" fill="#2B2118" opacity="0.13" />
+  <g transform="translate(0 8)"><rect x="87.0" y="37.0" width="50" height="150" rx="19.2" fill="#E0A92E" /><rect x="37.0" y="87.0" width="150" height="50" rx="19.2" fill="#E0A92E" /></g><rect x="87.0" y="37.0" width="50" height="150" rx="19.2" fill="#F7C948" /><rect x="37.0" y="87.0" width="150" height="50" rx="19.2" fill="#F7C948" />
+  <rect x="96" y="44" width="10" height="44" rx="5" fill="#FFFFFF" opacity="0.45" />
+  <g transform="translate(0 6)"><rect x="160" y="172" width="72" height="30" rx="15" fill="#E2D2B8" /></g><rect x="160" y="172" width="72" height="30" rx="15" fill="#FFFDF8" />
+</svg>

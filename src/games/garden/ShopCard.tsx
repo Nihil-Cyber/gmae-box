@@ -1,3 +1,4 @@
+import { IconSprite, StarMark } from '../../components/IconSprite'
 import type { ShopItem } from '../../lib/garden'
 import { DecoSprite, DECO_META } from './DecoSprite'
 import { PetSprite, PET_BLURBS, PET_CARD_BG, PET_NAMES } from './PetSprite'
@@ -39,13 +40,13 @@ export function ShopCard({
 
   let action = (
     <button type="button" className="toy-btn toy-btn--honey" onClick={onBuy}>
-      ⭐ {item.cost} 購買
+      <StarMark size={16} /> {item.cost} 購買
     </button>
   )
   if (short) {
     action = (
       <button type="button" className={`toy-btn toy-btn--short ${shaking ? 'soft-shake' : ''}`} onClick={onBuy}>
-        ⭐ {item.cost}・仲差 {item.cost - stars} 粒
+        <StarMark size={16} /> {item.cost}・仲差 {item.cost - stars} 粒
       </button>
     )
   } else if (kind === 'upgrade' && maxed) {
@@ -77,7 +78,11 @@ export function ShopCard({
         {zone && <span className="g-tag">{zone === 'sky' ? '天空' : '地面'}</span>}
         {kind === 'pets' && isPetKind(item.id) && <PetSprite kind={item.id} size={88} />}
         {deco && <DecoSprite kind={deco} size={78} />}
-        {kind === 'upgrade' && <span className="g-upgrade-icon">{item.emoji}</span>}
+        {kind === 'upgrade' && (item.id === 'upgrade-slots' || item.id === 'upgrade-yard') && (
+          <span className="g-upgrade-icon">
+            <IconSprite kind={item.id} size={88} />
+          </span>
+        )}
         {owned && kind === 'pets' && placed && <span className="g-owned-tick">✓</span>}
         {owned && kind === 'decor' && placed && <span className="g-placed-mark" title="擺咗出嚟">✓</span>}
       </div>

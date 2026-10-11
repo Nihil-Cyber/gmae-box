@@ -1,67 +1,68 @@
 import type { GameId, Stats } from '../types'
+import { IconSprite, StarMark, type IconKind } from './IconSprite'
 import { Mascot } from './Mascot'
 
 const GAMES: {
   id: GameId
   title: string
   desc: string
-  emoji: string
+  icon: IconKind
   tone: 'mint' | 'coral' | 'grape' | 'sky' | 'rose' | 'amber' | 'teal' | 'indigo'
 }[] = [
   {
     id: 'addsub',
     title: '加加減減',
     desc: '單數到雙位加減',
-    emoji: '➕',
+    icon: 'home-addsub',
     tone: 'mint',
   },
   {
     id: 'muldiv',
     title: '乘乘除除',
     desc: '1 到 10 乘數表同除法',
-    emoji: '✖️',
+    icon: 'home-muldiv',
     tone: 'coral',
   },
   {
     id: 'olympiad',
     title: '奧數挑戰',
     desc: '規律、巧算、應用題',
-    emoji: '🧠',
+    icon: 'home-olympiad',
     tone: 'grape',
   },
   {
     id: 'sudoku',
     title: '四宮數獨',
     desc: '4 × 4 入門數獨',
-    emoji: '🔢',
+    icon: 'home-sudoku',
     tone: 'sky',
   },
   {
     id: 'smartSudoku',
     title: '智能數獨',
     desc: '彩色 6 × 6，一樣唔重複',
-    emoji: '🧩',
+    icon: 'home-smart-sudoku',
     tone: 'indigo',
   },
   {
     id: 'shapes',
     title: '圖形一樣',
     desc: '睇兩個圖形，一樣定唔同',
-    emoji: '🔷',
+    icon: 'home-shapes',
     tone: 'teal',
   },
   {
     id: 'readchar',
     title: '認一認字',
     desc: '睇圖、認字、辨相似字',
-    emoji: '📝',
+    icon: 'home-readchar',
     tone: 'rose',
   },
   {
     id: 'vocab',
     title: '單字配對',
     desc: '詞語、意思、填字',
-    emoji: '📖',
+    icon: 'home-vocab',
     tone: 'amber',
   },
 ]
@@ -82,7 +83,7 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
     <section>
       <div className="topbar">
         <div className="star-bank" aria-label={`已得到 ${stats.stars} 粒星星`}>
-          <span>⭐</span>
+          <StarMark size={22} />
           <span>{stats.stars}</span>
         </div>
         <button
@@ -91,7 +92,7 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
           onClick={onToggleMute}
           aria-label={stats.muted ? '開啟聲音' : '關閉聲音'}
         >
-          {stats.muted ? '🔇' : '🔊'}
+          <IconSprite kind={stats.muted ? 'icon-mute' : 'icon-sound'} size={26} />
         </button>
       </div>
 
@@ -106,7 +107,9 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
 
       <button type="button" className="game-card peach wide" onClick={onGarden}>
         <div>
-          <div className="emoji">🏡</div>
+          <div className="card-icon">
+            <IconSprite kind="home-garden" size={64} />
+          </div>
           <h2>我嘅家園</h2>
           <p>{petHint}</p>
         </div>
@@ -129,7 +132,9 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
               onClick={() => onPlay(game.id)}
             >
               <div>
-                <div className="emoji">{game.emoji}</div>
+                <div className="card-icon">
+                  <IconSprite kind={game.icon} size={56} />
+                </div>
                 <h2>{game.title}</h2>
                 <p>{game.desc}</p>
               </div>

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { emptyGarden } from '../types'
 import {
+  DECORS,
   MAX_PET_SLOTS,
+  PETS,
   clampSpot,
   defaultPetSpot,
   nextSlotCost,
@@ -87,6 +89,19 @@ describe('garden upgrades', () => {
     expect(nextSlotCost(MAX_PET_SLOTS)).toBeNull()
     expect(nextYardCost(0)).toBe(10)
     expect(nextYardCost(3)).toBeNull()
+  })
+
+  it('lists the sticker pets and decorations in the shop', () => {
+    expect(PETS.map((item) => item.id)).toEqual([
+      'chick', 'rabbit', 'cat', 'dog', 'panda', 'dragon',
+      'penguin', 'frog', 'hamster', 'pig', 'turtle', 'owl',
+    ])
+    expect(DECORS.map((item) => item.id)).toEqual([
+      'sun', 'moon', 'stars', 'rainbow', 'cloud',
+      'flower', 'tree', 'mushroom', 'house', 'fountain',
+      'lantern', 'balloon', 'pond', 'fence', 'berry',
+      'kite', 'swing', 'bench', 'bush', 'snowman', 'pinwheel',
+    ])
   })
 
   it('keeps pets on the grass', () => {

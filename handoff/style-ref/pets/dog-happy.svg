@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="512" height="512" role="img" aria-label="小狗">
+  <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+  <path d="M90 90 C100 86 104 78 102 70" stroke="#D9A877" stroke-width="8" stroke-linecap="round" fill="none" />
+  <ellipse cx="60" cy="72" rx="34" ry="33" fill="#D9A877" />
+  <ellipse cx="30" cy="62" rx="10" ry="20" fill="#9C6B45" transform="rotate(18 30 62)" />
+  <ellipse cx="90" cy="62" rx="10" ry="20" fill="#9C6B45" transform="rotate(-18 90 62)" />
+  <ellipse cx="72" cy="63" rx="10" ry="9" fill="#C08A5C" opacity="0.85" />
+  <ellipse cx="60" cy="84" rx="15" ry="11" fill="#FBEBD6" />
+  <ellipse cx="41" cy="78" rx="6" ry="3.5" fill="#E8785E" opacity="0.45" />
+  <ellipse cx="79" cy="78" rx="6" ry="3.5" fill="#E8785E" opacity="0.45" />
+  <g opacity="0"><ellipse cx="49" cy="66" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="50.4" cy="64.2" r="1.6" fill="#FFFFFF" /><ellipse cx="71" cy="66" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="72.4" cy="64.2" r="1.6" fill="#FFFFFF" /></g>
+  <g opacity="1" fill="none" stroke="#2B2118" stroke-width="3" stroke-linecap="round"><path d="M44 67 Q49 61 54 67" /><path d="M66 67 Q71 61 76 67" /></g>
+  <ellipse cx="60" cy="79" rx="5.5" ry="4" fill="#2B2118" />
+  <path d="M56 89 Q60 97 64 89 Z" fill="#F08A7E" />
+  <path d="M60 83 v4 M60 87 Q56 90 53 87 M60 87 Q64 90 67 87" stroke="#2B2118" stroke-width="2" fill="none" stroke-linecap="round" />
+</svg>

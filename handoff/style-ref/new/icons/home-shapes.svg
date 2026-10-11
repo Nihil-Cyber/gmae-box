@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="圖形一樣">
+  <ellipse cx="128" cy="194" rx="108" ry="10" fill="#2B2118" opacity="0.13" />
+  <g transform="translate(0 7)"><rect x="33.0" y="87.0" width="66" height="66" rx="14.5" fill="#D9A12A" transform="rotate(45 66 120)" /></g><rect x="33.0" y="87.0" width="66" height="66" rx="14.5" fill="#F7C948" transform="rotate(45 66 120)" />
+  <ellipse cx="54" cy="96" rx="9" ry="4.5" fill="#FFFFFF" opacity="0.5" transform="rotate(-45 54 96)" />
+  <g transform="translate(0 7)"><rect x="157.0" y="87.0" width="66" height="66" rx="14.5" fill="#D9A12A" transform="rotate(45 190 120)" /></g><rect x="157.0" y="87.0" width="66" height="66" rx="14.5" fill="#F7C948" transform="rotate(45 190 120)" />
+  <ellipse cx="178" cy="96" rx="9" ry="4.5" fill="#FFFFFF" opacity="0.5" transform="rotate(-45 178 96)" />
+  <g transform="translate(0 4)"><rect x="113" y="104" width="30" height="11" rx="5.5" fill="#E2D2B8" /><rect x="113" y="126" width="30" height="11" rx="5.5" fill="#E2D2B8" /></g><rect x="113" y="104" width="30" height="11" rx="5.5" fill="#FFFDF8" /><rect x="113" y="126" width="30" height="11" rx="5.5" fill="#FFFDF8" />
+</svg>

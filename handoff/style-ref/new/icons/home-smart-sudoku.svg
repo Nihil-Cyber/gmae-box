@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="智能數獨">
+  <ellipse cx="128" cy="230" rx="96" ry="10" fill="#2B2118" opacity="0.13" />
+  <g transform="translate(0 8)"><rect x="42" y="34" width="172" height="176" rx="26" fill="#D9C49A" /></g><rect x="42" y="34" width="172" height="176" rx="26" fill="#F6E7C1" />
+  <rect x="56" y="53" width="44" height="44" rx="11" fill="#B93A2C" /><rect x="56" y="48" width="44" height="44" rx="11" fill="#E24C3B" /><rect x="63" y="54" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+  <rect x="106" y="53" width="44" height="44" rx="11" fill="#C98A2E" /><rect x="106" y="48" width="44" height="44" rx="11" fill="#F2B04A" /><rect x="113" y="54" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+  <rect x="156" y="53" width="44" height="44" rx="11" fill="#E2D2B8" /><rect x="156" y="48" width="44" height="44" rx="11" fill="#FFFDF8" />
+  <rect x="56" y="103" width="44" height="44" rx="11" fill="#1F5A8A" /><rect x="56" y="98" width="44" height="44" rx="11" fill="#2B78B5" /><rect x="63" y="104" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+  <rect x="106" y="103" width="44" height="44" rx="11" fill="#E2D2B8" /><rect x="106" y="98" width="44" height="44" rx="11" fill="#FFFDF8" />
+  <rect x="156" y="103" width="44" height="44" rx="11" fill="#72AE83" /><rect x="156" y="98" width="44" height="44" rx="11" fill="#9ED4AC" /><rect x="163" y="104" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+  <rect x="56" y="153" width="44" height="44" rx="11" fill="#E2D2B8" /><rect x="56" y="148" width="44" height="44" rx="11" fill="#FFFDF8" />
+  <rect x="106" y="153" width="44" height="44" rx="11" fill="#3F3366" /><rect x="106" y="148" width="44" height="44" rx="11" fill="#5A4A8A" /><rect x="113" y="154" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+  <rect x="156" y="153" width="44" height="44" rx="11" fill="#C8667A" /><rect x="156" y="148" width="44" height="44" rx="11" fill="#F08A9E" /><rect x="163" y="154" width="16" height="5" rx="2.5" fill="#FFFFFF" opacity="0.4" />
+</svg>

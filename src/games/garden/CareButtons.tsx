@@ -1,3 +1,5 @@
+import { IconSprite, StarMark } from '../../components/IconSprite'
+
 type Props = {
   feeding: boolean
   shaking: boolean
@@ -17,11 +19,16 @@ export function CareButtons({ feeding, shaking, onPat, onFeed }: Props) {
         onClick={onFeed}
       >
         餵零食
-        <span className="g-star-chip">⭐1</span>
+        <span className="g-star-chip">
+          <StarMark size={14} />
+          1
+        </span>
       </button>
       {feeding && (
         <span className="g-snack snack-x" aria-hidden>
-          <span className="snack-y">🍪</span>
+          <span className="snack-y">
+            <IconSprite kind="icon-cookie" size={36} />
+          </span>
         </span>
       )}
     </div>

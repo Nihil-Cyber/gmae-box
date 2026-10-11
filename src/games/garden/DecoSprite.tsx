@@ -5,7 +5,8 @@ import type { JSX } from 'react';
 export type DecoKind =
   | 'sun' | 'moon' | 'stars' | 'rainbow' | 'cloud'
   | 'flower' | 'tree' | 'mushroom' | 'house' | 'fountain'
-  | 'lantern' | 'balloon' | 'pond' | 'fence' | 'fruittree';
+  | 'lantern' | 'balloon' | 'pond' | 'fence' | 'fruittree'
+  | 'kite' | 'swing' | 'bench' | 'bush' | 'snowman' | 'pinwheel';
 
 export type DecoZone = 'sky' | 'ground';
 
@@ -25,6 +26,12 @@ export const DECO_META: Record<DecoKind, { name: string; zone: DecoZone; blurb: 
   pond:      { name: '小池', zone: 'ground', blurb: '小魚喺度游水' },
   fence:     { name: '木欄', zone: 'ground', blurb: '圍住我哋嘅花園' },
   fruittree: { name: '果樹', zone: 'ground', blurb: '結滿香甜果子' },
+  kite:      { name: '風箏', zone: 'sky',    blurb: '飛上天，尾巴甩甩' },
+  swing:     { name: '鞦韆', zone: 'ground', blurb: '蕩嚟蕩去好開心' },
+  bench:     { name: '長櫈', zone: 'ground', blurb: '坐低唞一唞' },
+  bush:      { name: '莓果樹叢', zone: 'ground', blurb: '結滿紅莓果' },
+  snowman:   { name: '雪人', zone: 'ground', blurb: '冬天一齊堆雪' },
+  pinwheel:  { name: '風車', zone: 'ground', blurb: '風一吹就轉' },
 };
 
 const DRAW: Record<DecoKind, () => JSX.Element> = {
@@ -201,6 +208,73 @@ const DRAW: Record<DecoKind, () => JSX.Element> = {
       <circle cx="66" cy="54" r="5" fill="#F2A765" />
       <circle cx="42" cy="60" r="4.5" fill="#F08A6E" />
       <circle cx="52" cy="48" r="4.5" fill="#F08A6E" />
+    </>
+  ),
+  kite: () => (
+    <>
+      <path d="M50 66 C40 72 60 78 50 84 C42 89 54 92 48 96" stroke="#9C6B45" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      <path d="M43 70 L50 74 L43 78 Z M57 78 L50 82 L57 86 Z" fill="#8EC5E0" />
+      <path d="M50 10 L76 36 L50 66 L24 36 Z" fill="#F08A6E" stroke="#F08A6E" strokeWidth="4" strokeLinejoin="round" />
+      <path d="M50 10 L76 36 L50 36 Z M24 36 L50 36 L50 66 Z" fill="#F7C948" stroke="#F7C948" strokeWidth="0.5" strokeLinejoin="round" />
+      <path d="M50 12 V64 M26 36 H74" stroke="#D9665A" strokeWidth="2" strokeLinecap="round" />
+      <ellipse cx="40" cy="26" rx="5" ry="3" fill="#FFFFFF" opacity="0.4" transform="rotate(-45 40 26)" />
+    </>
+  ),
+  swing: () => (
+    <>
+      <ellipse cx="50" cy="93" rx="38" ry="4.5" fill="#2B2118" opacity="0.13" />
+      <path d="M14 92 L26 16 M38 92 L26 16 M62 92 L74 16 M86 92 L74 16" stroke="#9C6B45" strokeWidth="5" strokeLinecap="round" />
+      <rect x="18" y="12" width="64" height="8" rx="4" fill="#B5782F" />
+      <path d="M38 20 V68 M62 20 V68" stroke="#D9A877" strokeWidth="2.4" strokeLinecap="round" />
+      <rect x="32" y="66" width="36" height="8" rx="4" fill="#D9784F" />
+      <ellipse cx="42" cy="68" rx="5" ry="1.6" fill="#FFFFFF" opacity="0.35" />
+    </>
+  ),
+  bench: () => (
+    <>
+      <ellipse cx="50" cy="90" rx="40" ry="4.5" fill="#2B2118" opacity="0.13" />
+      <path d="M20 60 V88 M80 60 V88 M24 46 V60 M76 46 V60" stroke="#9C6B45" strokeWidth="5" strokeLinecap="round" />
+      <rect x="12" y="32" width="76" height="9" rx="4.5" fill="#E8C49A" />
+      <rect x="12" y="44" width="76" height="9" rx="4.5" fill="#D9A877" />
+      <rect x="8" y="58" width="84" height="10" rx="5" fill="#D9A877" />
+      <rect x="18" y="60" width="20" height="2.5" rx="1.25" fill="#FFFFFF" opacity="0.35" />
+    </>
+  ),
+  bush: () => (
+    <>
+      <ellipse cx="50" cy="90" rx="38" ry="4.5" fill="#2B2118" opacity="0.13" />
+      <circle cx="28" cy="70" r="18" fill="#6FB282" />
+      <circle cx="72" cy="70" r="18" fill="#6FB282" />
+      <circle cx="50" cy="58" r="24" fill="#7CBF8C" />
+      <path d="M12 74 C12 92 88 92 88 74 Z" fill="#6FB282" />
+      <ellipse cx="42" cy="44" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.3" transform="rotate(-25 42 44)" />
+      <circle cx="34" cy="64" r="4" fill="#E8665A" /><circle cx="58" cy="52" r="4" fill="#E8665A" /><circle cx="66" cy="74" r="4" fill="#E8665A" /><circle cx="44" cy="80" r="3.5" fill="#E8665A" /><circle cx="78" cy="62" r="3.5" fill="#E8665A" />
+      <circle cx="33" cy="63" r="1.2" fill="#FFFFFF" opacity="0.7" /><circle cx="57" cy="51" r="1.2" fill="#FFFFFF" opacity="0.7" /><circle cx="65" cy="73" r="1.2" fill="#FFFFFF" opacity="0.7" />
+    </>
+  ),
+  snowman: () => (
+    <>
+      <ellipse cx="50" cy="93" rx="26" ry="4.5" fill="#2B2118" opacity="0.13" />
+      <circle cx="50" cy="70" r="23" fill="#FFFDF8" stroke="#D9CDBB" strokeWidth="2" />
+      <circle cx="50" cy="36" r="17" fill="#FFFDF8" stroke="#D9CDBB" strokeWidth="2" />
+      <path d="M34 50 Q50 58 66 50 L66 55 Q50 63 34 55 Z" fill="#F08A6E" />
+      <path d="M58 56 L64 72 L56 70 Z" fill="#F08A6E" stroke="#F08A6E" strokeWidth="2" strokeLinejoin="round" />
+      <ellipse cx="43" cy="28" rx="5" ry="3" fill="#FFFFFF" opacity="0.8" transform="rotate(-25 43 28)" />
+      <circle cx="44" cy="34" r="2.4" fill="#2B2118" /><circle cx="56" cy="34" r="2.4" fill="#2B2118" />
+      <path d="M49 38 L58 41 L49 42 Z" fill="#F2A765" stroke="#F2A765" strokeWidth="1.5" strokeLinejoin="round" />
+      <ellipse cx="41" cy="40" rx="3.5" ry="2" fill="#F29A7A" opacity="0.6" /><ellipse cx="59" cy="40" rx="3.5" ry="2" fill="#F29A7A" opacity="0.6" />
+      <circle cx="50" cy="68" r="2.4" fill="#9C6B45" /><circle cx="50" cy="78" r="2.4" fill="#9C6B45" />
+    </>
+  ),
+  pinwheel: () => (
+    <>
+      <ellipse cx="50" cy="94" rx="12" ry="3" fill="#2B2118" opacity="0.12" />
+      <path d="M50 40 V93" stroke="#9C6B45" strokeWidth="4" strokeLinecap="round" />
+      <path d="M50 38 L50 10 C62 10 68 22 50 38 Z" fill="#F08A6E" stroke="#F08A6E" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M50 38 L78 38 C78 50 66 56 50 38 Z" fill="#F7C948" stroke="#F7C948" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M50 38 L50 66 C38 66 32 54 50 38 Z" fill="#8EC5E0" stroke="#8EC5E0" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M50 38 L22 38 C22 26 34 20 50 38 Z" fill="#9ED4AC" stroke="#9ED4AC" strokeWidth="2" strokeLinejoin="round" />
+      <circle cx="50" cy="38" r="4.5" fill="#FFFDF8" stroke="#D9784F" strokeWidth="2" />
     </>
   ),
 };

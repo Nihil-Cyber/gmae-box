@@ -15,6 +15,8 @@ export function decoSize(kind: DecoKind): number {
   if (kind === 'sun' || kind === 'rainbow') return 72
   if (kind === 'cloud' || kind === 'moon') return 52
   if (kind === 'stars') return 58
-  if (kind === 'tree' || kind === 'fruittree' || kind === 'house') return 70
+  if (kind === 'tree' || kind === 'fruittree' || kind === 'house' || kind === 'swing' || kind === 'bush') return 70
+  if (kind === 'kite' || kind === 'snowman') return 64
+  if (kind === 'bench') return 62
   return 56
 }

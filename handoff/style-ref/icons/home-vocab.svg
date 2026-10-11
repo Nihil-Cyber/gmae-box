@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="單字配對">
+  <ellipse cx="128" cy="222" rx="108" ry="10" fill="#2B2118" opacity="0.13" />
+  <path d="M18 80 Q72 60 128 82 Q184 60 238 80 V206 Q184 188 128 210 Q72 188 18 206 Z" fill="#2B78B5" />
+  <path d="M28 70 Q76 52 124 74 V196 Q76 176 28 192 Z" fill="#FFFDF8" />
+  <path d="M228 70 Q180 52 132 74 V196 Q180 176 228 192 Z" fill="#FFFDF8" />
+  <path d="M124 74 V196 M132 74 V196" stroke="#E2D2B8" stroke-width="3" />
+  <rect x="44" y="86" width="64" height="56" rx="10" fill="#DDF0E6" />
+  <circle cx="90" cy="102" r="8" fill="#F7C948" />
+  <path d="M44 132 Q62 110 80 124 Q92 116 108 128 V132 Q108 142 98 142 H54 Q44 142 44 132 Z" fill="#9ED4AC" />
+  <rect x="44" y="154" width="64" height="10" rx="5" fill="#F2B04A" />
+  <rect x="148" y="90" width="64" height="10" rx="5" fill="#D9784F" />
+  <rect x="148" y="112" width="48" height="10" rx="5" fill="#E2D2B8" />
+  <rect x="148" y="134" width="60" height="10" rx="5" fill="#E2D2B8" />
+  <rect x="148" y="156" width="40" height="10" rx="5" fill="#E2D2B8" />
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="星星">
+  <ellipse cx="64" cy="116" rx="40" ry="6" fill="#2B2118" opacity="0.13" />
+  <path d="M64.0 10.0 L78.7 41.8 L113.5 45.9 L87.8 69.7 L94.6 104.1 L64.0 87.0 L33.4 104.1 L40.2 69.7 L14.5 45.9 L49.3 41.8 Z" fill="#E0A92E" stroke="#E0A92E" stroke-width="12" stroke-linejoin="round" transform="translate(0 6)" />
+  <path d="M64.0 10.0 L78.7 41.8 L113.5 45.9 L87.8 69.7 L94.6 104.1 L64.0 87.0 L33.4 104.1 L40.2 69.7 L14.5 45.9 L49.3 41.8 Z" fill="#F7C948" stroke="#F7C948" stroke-width="12" stroke-linejoin="round" />
+  <path d="M64.0 38.0 L71.6 53.5 L88.7 56.0 L76.4 68.0 L79.3 85.0 L64.0 77.0 L48.7 85.0 L51.6 68.0 L39.3 56.0 L56.4 53.5 Z" fill="#F2B04A" stroke="#F2B04A" stroke-width="5" stroke-linejoin="round" />
+  <ellipse cx="50" cy="40" rx="7" ry="4" fill="#FFFFFF" opacity="0.55" transform="rotate(-35 50 40)" />
+</svg>

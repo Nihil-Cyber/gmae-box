@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="house">
+  <ellipse cx="50" cy="93" rx="34" ry="4.5" fill="#2B2118" opacity="0.13" />
+  <rect x="62" y="24" width="8" height="18" rx="2" fill="#B5582F" />
+  <rect x="24" y="48" width="52" height="44" rx="6" fill="#F4D3A8" />
+  <path d="M16 52 L50 20 L84 52 Z" fill="#D9784F" stroke="#D9784F" stroke-width="6" stroke-linejoin="round" />
+  <path d="M44 92 V76 A6 6 0 0 1 56 76 V92 Z" fill="#9C6B45" />
+  <rect x="30" y="58" width="12" height="12" rx="3" fill="#8EC5E0" />
+  <rect x="58" y="58" width="12" height="12" rx="3" fill="#8EC5E0" />
+</svg>

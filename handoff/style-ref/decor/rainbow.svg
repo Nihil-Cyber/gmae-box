@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="rainbow">
+  <g fill="none" stroke-linecap="round" stroke-width="7">
+  <path d="M14 74 A36 36 0 0 1 86 74" stroke="#F08A6E" />
+  <path d="M21 74 A29 29 0 0 1 79 74" stroke="#F7C948" />
+  <path d="M28 74 A22 22 0 0 1 72 74" stroke="#8CC89B" />
+  <path d="M35 74 A15 15 0 0 1 65 74" stroke="#8EC5E0" />
+  </g>
+  <ellipse cx="18" cy="77" rx="13" ry="7" fill="#FFFFFF" />
+  <circle cx="14" cy="72" r="6" fill="#FFFFFF" />
+  <ellipse cx="82" cy="77" rx="13" ry="7" fill="#FFFFFF" />
+  <circle cx="86" cy="72" r="6" fill="#FFFFFF" />
+</svg>

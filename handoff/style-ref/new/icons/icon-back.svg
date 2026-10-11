@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="返回">
+  <ellipse cx="64" cy="116" rx="40" ry="6" fill="#2B2118" opacity="0.13" />
+  <g transform="translate(0 6)"><path d="M20 62 L56 28 V48 H96 Q108 48 108 60 V66 Q108 78 96 78 H56 V96 Z" fill="#C98A2E" stroke="#C98A2E" stroke-width="10" stroke-linejoin="round" /></g><path d="M20 62 L56 28 V48 H96 Q108 48 108 60 V66 Q108 78 96 78 H56 V96 Z" fill="#F2B04A" stroke="#F2B04A" stroke-width="10" stroke-linejoin="round" />
+  <rect x="62" y="52" width="30" height="6" rx="3" fill="#FFFFFF" opacity="0.45" />
+</svg>

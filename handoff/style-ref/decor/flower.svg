@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="flower">
+  <ellipse cx="50" cy="92" rx="22" ry="4" fill="#2B2118" opacity="0.12" />
+  <path d="M50 90 C50 76 50 66 50 50" stroke="#5E9F6E" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M50 80 C40 80 34 72 36 66 C44 66 50 72 50 80 Z" fill="#7CBF8C" />
+  <path d="M50 72 C60 72 66 64 64 58 C56 58 50 64 50 72 Z" fill="#8CC89B" />
+  <circle cx="50" cy="29" r="9" fill="#F4907E" />
+  <circle cx="60.5" cy="36.6" r="9" fill="#F4907E" />
+  <circle cx="56.5" cy="49" r="9" fill="#F4907E" />
+  <circle cx="43.5" cy="49" r="9" fill="#F4907E" />
+  <circle cx="39.5" cy="36.6" r="9" fill="#F4907E" />
+  <circle cx="50" cy="40" r="7" fill="#F7C948" />
+</svg>

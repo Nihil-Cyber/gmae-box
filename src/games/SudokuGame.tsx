@@ -10,6 +10,7 @@ import {
 } from '../lib/sudoku'
 import { playCorrect, playTap, playWin, playWrong, unlockAudio } from '../lib/audio'
 import { Confetti } from '../components/Confetti'
+import { IconSprite, StarMark } from '../components/IconSprite'
 import { DifficultyPicker } from '../components/DifficultyPicker'
 
 const CLUES: Record<Difficulty, number> = {
@@ -144,7 +145,7 @@ export function SudokuGame({ muted, onBack, onWin }: Props) {
       <Confetti show={phase === 'win'} />
       <div className="shell-head">
         <button type="button" className="icon-btn" onClick={onBack} aria-label="返回">
-          ←
+          <IconSprite kind="icon-back" size={26} />
         </button>
         <h2>四宮數獨</h2>
       </div>
@@ -227,7 +228,9 @@ export function SudokuGame({ muted, onBack, onWin }: Props) {
           {phase === 'win' && (
             <div className="result" style={{ marginTop: 18, width: '100%' }}>
               <h2>完成喇！好叻啊 Wesley！</h2>
-              <p className="big">⭐ +{difficulty === 'hard' ? 5 : difficulty === 'medium' ? 4 : 3}</p>
+              <p className="big">
+                <StarMark size={28} /> +{difficulty === 'hard' ? 5 : difficulty === 'medium' ? 4 : 3}
+              </p>
               <div className="actions">
                 <button type="button" className="ghost" onClick={onBack}>
                   返主頁

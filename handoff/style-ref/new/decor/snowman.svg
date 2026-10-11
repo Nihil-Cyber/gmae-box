@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="snowman">
+  <ellipse cx="50" cy="93" rx="26" ry="4.5" fill="#2B2118" opacity="0.13" />
+  <circle cx="50" cy="70" r="23" fill="#FFFDF8" stroke="#D9CDBB" stroke-width="2" />
+  <circle cx="50" cy="36" r="17" fill="#FFFDF8" stroke="#D9CDBB" stroke-width="2" />
+  <path d="M34 50 Q50 58 66 50 L66 55 Q50 63 34 55 Z" fill="#F08A6E" />
+  <path d="M58 56 L64 72 L56 70 Z" fill="#F08A6E" stroke="#F08A6E" stroke-width="2" stroke-linejoin="round" />
+  <ellipse cx="43" cy="28" rx="5" ry="3" fill="#FFFFFF" opacity="0.8" transform="rotate(-25 43 28)" />
+  <circle cx="44" cy="34" r="2.4" fill="#2B2118" /><circle cx="56" cy="34" r="2.4" fill="#2B2118" />
+  <path d="M49 38 L58 41 L49 42 Z" fill="#F2A765" stroke="#F2A765" stroke-width="1.5" stroke-linejoin="round" />
+  <ellipse cx="41" cy="40" rx="3.5" ry="2" fill="#F29A7A" opacity="0.6" /><ellipse cx="59" cy="40" rx="3.5" ry="2" fill="#F29A7A" opacity="0.6" />
+  <circle cx="50" cy="68" r="2.4" fill="#9C6B45" /><circle cx="50" cy="78" r="2.4" fill="#9C6B45" />
+</svg>

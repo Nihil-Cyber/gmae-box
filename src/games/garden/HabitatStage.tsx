@@ -5,6 +5,7 @@ import { DecoSprite } from './DecoSprite'
 import { PetSprite, PET_NAMES, type PetKind, type PetMood } from './PetSprite'
 import { decoKind, decoSize, isPetKind } from './ids'
 import { size } from './tokens'
+import { IconSprite } from '../../components/IconSprite'
 import { usePetWander } from './usePetWander'
 
 type Heart = { id: number; dx: number; petId?: string; slot?: number }
@@ -177,9 +178,9 @@ export function HabitatStage({
   return (
     <div className="g-theater-wrap">
       <div className="g-side-bits" aria-hidden>
-        <span>⭐</span>
-        <span>🌿</span>
-        <span>🎀</span>
+        <IconSprite kind="icon-star" size={32} />
+        <IconSprite kind="icon-heart" size={32} />
+        <IconSprite kind="icon-cookie" size={32} />
       </div>
       <div className={`g-theater is-yard-${yardLevel}`}>
         <div ref={sceneRef} className={`g-scene ${happySky ? 'is-happy' : 'is-calm'} ${drag ? 'is-hold' : ''}`}>
@@ -271,16 +272,16 @@ export function HabitatStage({
                 }}
                 onAnimationEnd={() => onHeartEnd(heart.id)}
               >
-                ♥
+                <IconSprite kind="icon-heart" size={28} />
               </i>
             )
           })}
         </div>
       </div>
       <div className="g-side-bits" aria-hidden>
-        <span>🌸</span>
+        <IconSprite kind="mascot" size={40} />
         <span>Wesley 嘅家</span>
-        <span>🔘</span>
+        <IconSprite kind="icon-star" size={32} />
       </div>
     </div>
   )

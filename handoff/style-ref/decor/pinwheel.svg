@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="pinwheel">
+  <ellipse cx="50" cy="94" rx="12" ry="3" fill="#2B2118" opacity="0.12" />
+  <path d="M50 40 V93" stroke="#9C6B45" stroke-width="4" stroke-linecap="round" />
+  <path d="M50 38 L50 10 C62 10 68 22 50 38 Z" fill="#F08A6E" stroke="#F08A6E" stroke-width="2" stroke-linejoin="round" />
+  <path d="M50 38 L78 38 C78 50 66 56 50 38 Z" fill="#F7C948" stroke="#F7C948" stroke-width="2" stroke-linejoin="round" />
+  <path d="M50 38 L50 66 C38 66 32 54 50 38 Z" fill="#8EC5E0" stroke="#8EC5E0" stroke-width="2" stroke-linejoin="round" />
+  <path d="M50 38 L22 38 C22 26 34 20 50 38 Z" fill="#9ED4AC" stroke="#9ED4AC" stroke-width="2" stroke-linejoin="round" />
+  <circle cx="50" cy="38" r="4.5" fill="#FFFDF8" stroke="#D9784F" stroke-width="2" />
+</svg>

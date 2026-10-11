@@ -17,6 +17,12 @@ export const PETS: ShopItem[] = [
   { id: 'dog', name: '小狗', emoji: '🐶', cost: 18, blurb: '聽到你就搖尾' },
   { id: 'panda', name: '熊貓', emoji: '🐼', cost: 28, blurb: '食飽就瞓' },
   { id: 'dragon', name: '小龍', emoji: '🐲', cost: 40, blurb: '家園守護者' },
+  { id: 'penguin', name: '企鵝', emoji: '', cost: 14, blurb: '企喺雪上面等你' },
+  { id: 'frog', name: '青蛙', emoji: '', cost: 10, blurb: '跳咗出嚟打招呼' },
+  { id: 'hamster', name: '倉鼠', emoji: '', cost: 15, blurb: '揸住粒瓜子' },
+  { id: 'pig', name: '豬仔', emoji: '', cost: 14, blurb: '圓嘟嘟，好溫柔' },
+  { id: 'turtle', name: '烏龜', emoji: '', cost: 22, blurb: '慢慢行都追到你' },
+  { id: 'owl', name: '貓頭鷹', emoji: '', cost: 24, blurb: '夜晚都陪住你' },
 ]
 
 export const DECORS: ShopItem[] = [
@@ -35,6 +41,12 @@ export const DECORS: ShopItem[] = [
   { id: 'pond', name: '小池', emoji: '💧', cost: 10, blurb: '可以照鏡', layer: 'ground' },
   { id: 'fence', name: '木欄', emoji: '🪵', cost: 6, blurb: '圍住草地', layer: 'ground' },
   { id: 'berry', name: '果樹', emoji: '🍎', cost: 9, blurb: '有得摘', layer: 'ground' },
+  { id: 'kite', name: '風箏', emoji: '', cost: 8, blurb: '飛上天，尾巴甩甩', layer: 'sky' },
+  { id: 'swing', name: '鞦韆', emoji: '', cost: 12, blurb: '蕩嚟蕩去好開心', layer: 'ground' },
+  { id: 'bench', name: '長櫈', emoji: '', cost: 8, blurb: '坐低唞一唞', layer: 'ground' },
+  { id: 'bush', name: '莓果樹叢', emoji: '', cost: 9, blurb: '結滿紅莓果', layer: 'ground' },
+  { id: 'snowman', name: '雪人', emoji: '', cost: 10, blurb: '冬天一齊堆雪', layer: 'ground' },
+  { id: 'pinwheel', name: '風車', emoji: '', cost: 6, blurb: '風一吹就轉', layer: 'ground' },
 ]
 
 export const DECOR_SPOT: Record<string, { left: string; top: string }> = {
@@ -53,6 +65,12 @@ export const DECOR_SPOT: Record<string, { left: string; top: string }> = {
   pond: { left: '52%', top: '74%' },
   fence: { left: '30%', top: '80%' },
   berry: { left: '86%', top: '64%' },
+  kite: { left: '18%', top: '16%' },
+  swing: { left: '56%', top: '50%' },
+  bench: { left: '36%', top: '66%' },
+  bush: { left: '80%', top: '60%' },
+  snowman: { left: '10%', top: '62%' },
+  pinwheel: { left: '48%', top: '54%' },
 }
 
 export function petById(id: string): ShopItem | undefined {

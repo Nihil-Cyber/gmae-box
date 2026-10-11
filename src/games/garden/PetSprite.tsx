@@ -2,11 +2,14 @@
 // 用法：<PetSprite kind="chick" mood="happy" size={136} />
 import type { JSX } from 'react';
 
-export type PetKind = 'chick' | 'rabbit' | 'cat' | 'dog' | 'panda' | 'dragon';
+export type PetKind =
+  | 'chick' | 'rabbit' | 'cat' | 'dog' | 'panda' | 'dragon'
+  | 'penguin' | 'frog' | 'hamster' | 'pig' | 'turtle' | 'owl';
 export type PetMood = 'normal' | 'happy';
 
 export const PET_NAMES: Record<PetKind, string> = {
   chick: '小雞', rabbit: '兔仔', cat: '小貓', dog: '小狗', panda: '熊貓', dragon: '小龍',
+  penguin: '企鵝', frog: '青蛙', hamster: '倉鼠', pig: '豬仔', turtle: '烏龜', owl: '貓頭鷹',
 };
 
 export const PET_BLURBS: Record<PetKind, string> = {
@@ -16,11 +19,18 @@ export const PET_BLURBS: Record<PetKind, string> = {
   dog: '搖尾巴等你返嚟',
   panda: '慢慢食，慢慢瞓',
   dragon: '守護家園嘅好朋友',
+  penguin: '企喺雪上面等你',
+  frog: '跳咗出嚟打招呼',
+  hamster: '揸住粒瓜子',
+  pig: '圓嘟嘟，好溫柔',
+  turtle: '慢慢行都追到你',
+  owl: '夜晚都陪住你',
 };
 
 /** 商店卡圖示底色 */
 export const PET_CARD_BG: Record<PetKind, string> = {
   chick: '#FDEBB5', rabbit: '#FBE0D6', cat: '#FCE3C4', dog: '#F3E2CC', panda: '#E4EEF2', dragon: '#D9F0E0',
+  penguin: '#E4ECF4', frog: '#DDF0D2', hamster: '#FBE6C8', pig: '#FBE0DE', turtle: '#E2F0DA', owl: '#EFE3D2',
 };
 
 type Draw = (open: number, happy: number) => JSX.Element;
@@ -142,6 +152,127 @@ const DRAW: Record<PetKind, Draw> = {
       <circle cx="57" cy="76" r="1.4" fill="#2B2118" />
       <circle cx="63" cy="76" r="1.4" fill="#2B2118" />
       <path d="M54 80 Q60 85 66 80" stroke="#2B2118" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+    </>
+  ),
+  penguin: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <ellipse cx="47" cy="104" rx="9" ry="4.5" fill="#F2A765" />
+      <ellipse cx="73" cy="104" rx="9" ry="4.5" fill="#F2A765" />
+      <ellipse cx="60" cy="71" rx="34" ry="34" fill="#4A5C78" />
+      <ellipse cx="27" cy="80" rx="7" ry="14" fill="#3E4E66" transform="rotate(22 27 80)" />
+      <ellipse cx="93" cy="80" rx="7" ry="14" fill="#3E4E66" transform="rotate(-22 93 80)" />
+      <circle cx="49" cy="65" r="13" fill="#FFFDF8" />
+      <circle cx="71" cy="65" r="13" fill="#FFFDF8" />
+      <ellipse cx="60" cy="84" rx="24" ry="20" fill="#FFFDF8" />
+      <ellipse cx="45" cy="45" rx="10" ry="5" fill="#FFFFFF" opacity="0.25" transform="rotate(-20 45 45)" />
+      <ellipse cx="40" cy="77" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <ellipse cx="80" cy="77" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="49" cy="66" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="50.4" cy="64.2" r="1.6" fill="#FFFFFF" /><ellipse cx="71" cy="66" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="72.4" cy="64.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M44 67 Q49 61 54 67" /><path d="M66 67 Q71 61 76 67" /></g>
+      <path d="M55 74 L65 74 L60 80 Z" fill="#F2B04A" stroke="#F2B04A" strokeWidth="2.5" strokeLinejoin="round" />
+    </>
+  ),
+  frog: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <ellipse cx="40" cy="104" rx="12" ry="5" fill="#7CBF8C" />
+      <ellipse cx="80" cy="104" rx="12" ry="5" fill="#7CBF8C" />
+      <circle cx="43" cy="52" r="13" fill="#8CC89B" />
+      <circle cx="77" cy="52" r="13" fill="#8CC89B" />
+      <ellipse cx="60" cy="77" rx="36" ry="29" fill="#8CC89B" />
+      <circle cx="43" cy="52" r="8.5" fill="#FFFDF8" />
+      <circle cx="77" cy="52" r="8.5" fill="#FFFDF8" />
+      <ellipse cx="60" cy="92" rx="21" ry="12" fill="#E3F2CF" />
+      <circle cx="31" cy="86" r="3.5" fill="#7CBF8C" /><circle cx="89" cy="86" r="3.5" fill="#7CBF8C" /><circle cx="84" cy="94" r="2.5" fill="#7CBF8C" />
+      <ellipse cx="38" cy="43" rx="5" ry="3" fill="#FFFFFF" opacity="0.4" transform="rotate(-25 38 43)" />
+      <ellipse cx="36" cy="74" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <ellipse cx="84" cy="74" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="43" cy="53" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="44.4" cy="51.2" r="1.6" fill="#FFFFFF" /><ellipse cx="77" cy="53" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="78.4" cy="51.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M38 54 Q43 48 48 54" /><path d="M72 54 Q77 48 82 54" /></g>
+      <path d="M47 75 Q60 85 73 75" stroke="#2B2118" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+      <circle cx="56" cy="68" r="1.3" fill="#2B2118" /><circle cx="64" cy="68" r="1.3" fill="#2B2118" />
+    </>
+  ),
+  hamster: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <ellipse cx="48" cy="104" rx="7" ry="4" fill="#F4B6A6" />
+      <ellipse cx="72" cy="104" rx="7" ry="4" fill="#F4B6A6" />
+      <circle cx="35" cy="45" r="10" fill="#F2B04A" /><circle cx="35" cy="46" r="5.5" fill="#F4B6A6" />
+      <circle cx="85" cy="45" r="10" fill="#F2B04A" /><circle cx="85" cy="46" r="5.5" fill="#F4B6A6" />
+      <ellipse cx="60" cy="73" rx="37" ry="32" fill="#F2B04A" />
+      <ellipse cx="60" cy="87" rx="26" ry="18" fill="#FFF4E0" />
+      <ellipse cx="46" cy="52" rx="9" ry="5" fill="#FFFFFF" opacity="0.35" transform="rotate(-20 46 52)" />
+      <ellipse cx="36" cy="78" rx="6" ry="3.5" fill="#F29A7A" opacity="0.75" />
+      <ellipse cx="84" cy="78" rx="6" ry="3.5" fill="#F29A7A" opacity="0.75" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="48" cy="67" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="49.4" cy="65.2" r="1.6" fill="#FFFFFF" /><ellipse cx="72" cy="67" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="73.4" cy="65.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M43 68 Q48 62 53 68" /><path d="M67 68 Q72 62 77 68" /></g>
+      <ellipse cx="60" cy="75" rx="3" ry="2.2" fill="#E88C82" />
+      <path d="M60 77 Q57 81 54 79 M60 77 Q63 81 66 79" stroke="#2B2118" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <ellipse cx="60" cy="94" rx="5" ry="7" fill="#7A5A3E" /><path d="M60 88 V100" stroke="#B9946E" strokeWidth="1.6" strokeLinecap="round" />
+      <ellipse cx="52" cy="93" rx="4.5" ry="3.5" fill="#F7D9A8" />
+      <ellipse cx="68" cy="93" rx="4.5" ry="3.5" fill="#F7D9A8" />
+    </>
+  ),
+  pig: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <path d="M92 86 C102 86 104 76 98 74 C93 73 93 80 98 80" stroke="#F29A92" strokeWidth="4" fill="none" strokeLinecap="round" />
+      <ellipse cx="47" cy="103" rx="9" ry="5" fill="#F29A92" />
+      <ellipse cx="73" cy="103" rx="9" ry="5" fill="#F29A92" />
+      <ellipse cx="36" cy="45" rx="9" ry="13" fill="#F29A92" transform="rotate(-40 36 45)" />
+      <ellipse cx="84" cy="45" rx="9" ry="13" fill="#F29A92" transform="rotate(40 84 45)" />
+      <ellipse cx="60" cy="73" rx="35" ry="32" fill="#F7B8B0" />
+      <ellipse cx="46" cy="52" rx="10" ry="5.5" fill="#FFFFFF" opacity="0.35" transform="rotate(-20 46 52)" />
+      <ellipse cx="38" cy="80" rx="6" ry="3.5" fill="#EE7F78" opacity="0.5" />
+      <ellipse cx="82" cy="80" rx="6" ry="3.5" fill="#EE7F78" opacity="0.5" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="47" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="48.4" cy="63.2" r="1.6" fill="#FFFFFF" /><ellipse cx="73" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="74.4" cy="63.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M42 66 Q47 60 52 66" /><path d="M68 66 Q73 60 78 66" /></g>
+      <ellipse cx="60" cy="79" rx="12" ry="8.5" fill="#F29A92" />
+      <ellipse cx="56" cy="79" rx="2" ry="3" fill="#C8645C" /><ellipse cx="64" cy="79" rx="2" ry="3" fill="#C8645C" />
+      <path d="M55 91 Q60 95 65 91" stroke="#2B2118" strokeWidth="2" fill="none" strokeLinecap="round" />
+    </>
+  ),
+  turtle: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <ellipse cx="30" cy="100" rx="9" ry="5" fill="#8CC89B" />
+      <ellipse cx="90" cy="100" rx="9" ry="5" fill="#8CC89B" />
+      <path d="M16 92 C16 46 104 46 104 92 Z" fill="#D9A877" />
+      <circle cx="29" cy="78" r="7" fill="#C08A5C" /><circle cx="91" cy="78" r="7" fill="#C08A5C" />
+      <circle cx="36" cy="62" r="5.5" fill="#C08A5C" /><circle cx="84" cy="62" r="5.5" fill="#C08A5C" />
+      <rect x="14" y="88" width="92" height="9" rx="4.5" fill="#B5782F" />
+      <ellipse cx="47" cy="104" rx="9" ry="5" fill="#8CC89B" />
+      <ellipse cx="73" cy="104" rx="9" ry="5" fill="#8CC89B" />
+      <ellipse cx="60" cy="72" rx="24" ry="23" fill="#9ED4AC" />
+      <ellipse cx="51" cy="57" rx="7" ry="4" fill="#FFFFFF" opacity="0.4" transform="rotate(-20 51 57)" />
+      <ellipse cx="45" cy="78" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <ellipse cx="75" cy="78" rx="6" ry="3.5" fill="#F29A7A" opacity="0.6" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="51" cy="70" rx="3.8" ry="4.8" fill="#2B2118" /><circle cx="52.4" cy="68.2" r="1.6" fill="#FFFFFF" /><ellipse cx="69" cy="70" rx="3.8" ry="4.8" fill="#2B2118" /><circle cx="70.4" cy="68.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M46 71 Q51 65 56 71" /><path d="M64 71 Q69 65 74 71" /></g>
+      <path d="M54 80 Q60 85 66 80" stroke="#2B2118" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+    </>
+  ),
+  owl: (open, happy) => (
+    <>
+      <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+      <path d="M50 102 l-3 6 M50 102 l0 6 M50 102 l3 6 M70 102 l-3 6 M70 102 l0 6 M70 102 l3 6" stroke="#E0783A" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path d="M34 48 L30 28 L48 40 Z" fill="#B98654" stroke="#B98654" strokeWidth="6" strokeLinejoin="round" />
+      <path d="M86 48 L90 28 L72 40 Z" fill="#B98654" stroke="#B98654" strokeWidth="6" strokeLinejoin="round" />
+      <ellipse cx="60" cy="71" rx="34" ry="33" fill="#B98654" />
+      <ellipse cx="27" cy="80" rx="8" ry="16" fill="#9C6B45" transform="rotate(15 27 80)" />
+      <ellipse cx="93" cy="80" rx="8" ry="16" fill="#9C6B45" transform="rotate(-15 93 80)" />
+      <ellipse cx="60" cy="90" rx="19" ry="13" fill="#F4D3A8" />
+      <path d="M52 86 l3 3 l3 -3 M62 86 l3 3 l3 -3 M57 93 l3 3 l3 -3" stroke="#D9A877" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="48" cy="64" r="12" fill="#FBEBD6" />
+      <circle cx="72" cy="64" r="12" fill="#FBEBD6" />
+      <ellipse cx="44" cy="46" rx="9" ry="4.5" fill="#FFFFFF" opacity="0.25" transform="rotate(-20 44 46)" />
+      <ellipse cx="36" cy="76" rx="6" ry="3.5" fill="#E8785E" opacity="0.45" />
+      <ellipse cx="84" cy="76" rx="6" ry="3.5" fill="#E8785E" opacity="0.45" />
+      <g className="pet-eyes" opacity={open}><ellipse cx="48" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="49.4" cy="63.2" r="1.6" fill="#FFFFFF" /><ellipse cx="72" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="73.4" cy="63.2" r="1.6" fill="#FFFFFF" /></g>
+      <g className="pet-eyes" opacity={happy} fill="none" stroke="#2B2118" strokeWidth="3" strokeLinecap="round"><path d="M43 66 Q48 60 53 66" /><path d="M67 66 Q72 60 77 66" /></g>
+      <path d="M56 71 L64 71 L60 78 Z" fill="#F2B04A" stroke="#F2B04A" strokeWidth="2.5" strokeLinejoin="round" />
     </>
   ),
 };

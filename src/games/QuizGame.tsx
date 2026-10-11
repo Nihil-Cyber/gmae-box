@@ -5,6 +5,7 @@ import { playCorrect, playTap, playWin, playWrong, unlockAudio } from '../lib/au
 import { Confetti } from '../components/Confetti'
 import { DifficultyPicker } from '../components/DifficultyPicker'
 import { NumberPad } from '../components/NumberPad'
+import { IconSprite, StarMark } from '../components/IconSprite'
 import { ShapeFigure } from '../components/ShapeFigure'
 
 const TOTAL = 10
@@ -143,12 +144,13 @@ export function QuizGame({
       <Confetti show={celebrate} />
       <div className="shell-head">
         <button type="button" className="icon-btn" onClick={onBack} aria-label="返回">
-          ←
+          <IconSprite kind="icon-back" size={26} />
         </button>
         <h2>{title}</h2>
         {phase === 'play' && (
           <div className="star-bank">
-            ⭐ {firstTry}
+            <StarMark size={22} />
+            {firstTry}
           </div>
         )}
       </div>
@@ -189,7 +191,7 @@ export function QuizGame({
                   window.speechSynthesis.speak(utter)
                 }}
               >
-                🔊 讀出嚟
+                <IconSprite kind="icon-sound" size={18} /> 讀出嚟
               </button>
             )}
             {question.figures && (
@@ -298,7 +300,9 @@ export function QuizGame({
       {phase === 'result' && (
         <div className="result">
           <h2>{praise(firstTry)}</h2>
-          <p className="big">⭐ {firstTry}</p>
+          <p className="big">
+            <StarMark size={28} /> {firstTry}
+          </p>
           <p>10 題入面，有 {firstTry} 題第一次就答啱。</p>
           <div className="actions">
             <button type="button" className="ghost" onClick={onBack}>

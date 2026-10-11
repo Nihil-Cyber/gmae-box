@@ -31,6 +31,9 @@
   font-weight: 800;
   box-shadow: 0 4px 0 #d7c39a;
   font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .ss-hint-btn {

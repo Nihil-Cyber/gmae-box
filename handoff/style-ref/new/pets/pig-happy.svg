@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="512" height="512" role="img" aria-label="豬仔">
+  <ellipse cx="60" cy="109" rx="32" ry="5.5" fill="#2B2118" opacity="0.13" />
+  <path d="M92 86 C102 86 104 76 98 74 C93 73 93 80 98 80" stroke="#F29A92" stroke-width="4" fill="none" stroke-linecap="round" />
+  <ellipse cx="47" cy="103" rx="9" ry="5" fill="#F29A92" />
+  <ellipse cx="73" cy="103" rx="9" ry="5" fill="#F29A92" />
+  <ellipse cx="36" cy="45" rx="9" ry="13" fill="#F29A92" transform="rotate(-40 36 45)" />
+  <ellipse cx="84" cy="45" rx="9" ry="13" fill="#F29A92" transform="rotate(40 84 45)" />
+  <ellipse cx="60" cy="73" rx="35" ry="32" fill="#F7B8B0" />
+  <ellipse cx="46" cy="52" rx="10" ry="5.5" fill="#FFFFFF" opacity="0.35" transform="rotate(-20 46 52)" />
+  <ellipse cx="38" cy="80" rx="6" ry="3.5" fill="#EE7F78" opacity="0.5" />
+  <ellipse cx="82" cy="80" rx="6" ry="3.5" fill="#EE7F78" opacity="0.5" />
+  <g opacity="0"><ellipse cx="47" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="48.4" cy="63.2" r="1.6" fill="#FFFFFF" /><ellipse cx="73" cy="65" rx="4.2" ry="5.2" fill="#2B2118" /><circle cx="74.4" cy="63.2" r="1.6" fill="#FFFFFF" /></g>
+  <g opacity="1" fill="none" stroke="#2B2118" stroke-width="3" stroke-linecap="round"><path d="M42 66 Q47 60 52 66" /><path d="M68 66 Q73 60 78 66" /></g>
+  <ellipse cx="60" cy="79" rx="12" ry="8.5" fill="#F29A92" />
+  <ellipse cx="56" cy="79" rx="2" ry="3" fill="#C8645C" /><ellipse cx="64" cy="79" rx="2" ry="3" fill="#C8645C" />
+  <path d="M55 91 Q60 95 65 91" stroke="#2B2118" stroke-width="2" fill="none" stroke-linecap="round" />
+</svg>

@@ -43,6 +43,7 @@
 
 /* 心心 / 茸毛粒子：用 --dx 控制飄去邊 */
 .heart-pop { position: absolute; pointer-events: none; translate: -50% 0; animation: heart-pop 900ms ease-out forwards; }
+.heart-pop svg { display: block; }
 @keyframes heart-pop {
   0%   { opacity: 0; transform: translate(0, 0) scale(0.4); }
   20%  { opacity: 1; transform: translate(0, -8px) scale(1); }
@@ -141,6 +142,11 @@
   font-family: inherit;
   font-weight: 900;
   color: var(--g-ink);
+}
+.g-back {
+  display: grid;
+  place-items: center;
+  padding: 0;
 }
 
 .g-stars {
@@ -295,7 +301,8 @@
 .g-subtabs.is-three button { font-size: 15px; }
 
 .g-card-art.is-upgrade { background: #f7e3b5; }
-.g-upgrade-icon { font-size: 48px; line-height: 1; }
+.g-upgrade-icon { line-height: 0; }
+.g-upgrade-icon svg { display: block; }
 
 .g-note {
   position: absolute;
@@ -403,12 +410,15 @@
   font-size: 21px;
 }
 .g-star-chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   margin-left: 6px;
   padding: 2px 8px;
   border-radius: 999px;
   background: #fff8e8;
   font-size: 16px;
+  vertical-align: middle;
 }
 
 .g-empty-card {
@@ -560,6 +570,10 @@
   min-height: 46px;
   border-radius: 16px;
   font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 .g-card .toy-btn:disabled {
   opacity: 1;
@@ -589,6 +603,10 @@
   position: absolute;
   z-index: 6;
   font-size: 28px;
+  line-height: 0;
+}
+.g-empty-card svg {
+  vertical-align: -4px;
 }
 
 @media (min-width: 768px) {

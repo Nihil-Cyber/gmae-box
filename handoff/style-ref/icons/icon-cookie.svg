@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="餵零食">
+  <ellipse cx="64" cy="116" rx="40" ry="6" fill="#2B2118" opacity="0.13" />
+  <defs><mask id="bite"><rect width="128" height="128" fill="#fff" /><circle cx="104" cy="28" r="17" fill="#000" /><circle cx="114" cy="48" r="11" fill="#000" /></mask></defs>
+  <g mask="url(#bite)"><circle cx="64" cy="66" r="46" fill="#B9793E" /><circle cx="64" cy="60" r="46" fill="#E0A85A" /><circle cx="64" cy="60" r="38" fill="#EBB86C" /><ellipse cx="44" cy="36" rx="10" ry="5" fill="#FFFFFF" opacity="0.4" transform="rotate(-35 44 36)" /><circle cx="48" cy="58" r="5.5" fill="#6B4A32" /><circle cx="74" cy="46" r="5" fill="#6B4A32" /><circle cx="80" cy="74" r="5.5" fill="#6B4A32" /><circle cx="54" cy="84" r="4.5" fill="#6B4A32" /><circle cx="64" cy="66" r="3.5" fill="#6B4A32" /><circle cx="36" cy="76" r="3.5" fill="#6B4A32" /></g>
+</svg>

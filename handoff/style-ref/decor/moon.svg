@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="moon">
+  <circle cx="50" cy="50" r="40" fill="#FFF3C4" opacity="0.35" />
+  <path d="M60 16 A34 34 0 1 0 84 72 A27 27 0 1 1 60 16 Z" fill="#F7E3A1" />
+  <circle cx="42" cy="40" r="4" fill="#EBCB78" opacity="0.7" />
+  <circle cx="36" cy="62" r="3" fill="#EBCB78" opacity="0.7" />
+  <path d="M36 52 Q40 48 44 52" stroke="#B5701F" stroke-width="2.4" fill="none" stroke-linecap="round" />
+  <ellipse cx="34" cy="58" rx="3" ry="1.8" fill="#F29A7A" opacity="0.7" />
+</svg>

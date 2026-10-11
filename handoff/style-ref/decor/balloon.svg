@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512" role="img" aria-label="balloon">
+  <ellipse cx="50" cy="94" rx="16" ry="3.5" fill="#2B2118" opacity="0.12" />
+  <path d="M36 50 C38 66 46 78 50 92 M64 44 C62 62 54 78 50 92" stroke="#9C6B45" stroke-width="1.8" fill="none" stroke-linecap="round" />
+  <ellipse cx="36" cy="32" rx="16" ry="19" fill="#F08A6E" />
+  <path d="M33 51 L39 51 L36 55 Z" fill="#F08A6E" />
+  <ellipse cx="30" cy="24" rx="4" ry="7" fill="#FFFFFF" opacity="0.4" transform="rotate(-20 30 24)" />
+  <ellipse cx="64" cy="26" rx="15" ry="18" fill="#8EC5E0" />
+  <path d="M61 44 L67 44 L64 48 Z" fill="#8EC5E0" />
+  <ellipse cx="58" cy="19" rx="4" ry="6" fill="#FFFFFF" opacity="0.45" transform="rotate(-20 58 19)" />
+  <rect x="46" y="88" width="8" height="6" rx="2" fill="#9C6B45" />
+</svg>
