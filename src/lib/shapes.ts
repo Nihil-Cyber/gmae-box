@@ -1,5 +1,6 @@
 import type { Difficulty, Question, ShapeFigure, ShapeKind } from '../types'
 import { pick, shuffle } from './random'
+import { contentLevel } from './skill'
 
 const COLORS = ['#e24c3b', '#e7a41a', '#2b78b5', '#1f8f6d', '#5a4a8a', '#d4527a']
 
@@ -53,6 +54,7 @@ function otherKind(from: ShapeKind, kinds: ShapeKind[]): ShapeKind {
 }
 
 export function makeShapes(difficulty: Difficulty): Question {
+  difficulty = contentLevel(difficulty)
   const kinds = pool(difficulty)
   const color = pick(COLORS)
   const same = Math.random() < 0.5

@@ -42,7 +42,7 @@ export function ShopPanel({
   onBuy,
   onUse,
 }: Props) {
-  const slotCost = nextSlotCost(petSlots) ?? 52
+  const slotCost = nextSlotCost(petSlots) ?? nextSlotCost(MAX_PET_SLOTS - 1) ?? 52
   const yardCost = nextYardCost(yardLevel) ?? 28
   const upgrades: ShopItem[] = [
     {
@@ -52,7 +52,7 @@ export function ShopPanel({
       cost: slotCost,
       blurb:
         petSlots >= MAX_PET_SLOTS
-          ? `而家最多同時 ${MAX_PET_SLOTS} 隻`
+          ? `有 ${MAX_PET_SLOTS} 款寵物，已經可以一齊放出嚟`
           : `而家 ${petSlots} 隻 → 買完可以 ${petSlots + 1} 隻一齊玩`,
     },
     {

@@ -17,7 +17,26 @@ function divAnswerBelow25(): { dividend: number; divisor: number; quotient: numb
   return { dividend: divisor * quotient, divisor, quotient }
 }
 
+function twoDigitTimesOneWithCarry(): { x: number; y: number } {
+  const y = randInt(2, 9)
+  const minOnes = Math.ceil(10 / y)
+  const xOnes = randInt(minOnes, 9)
+  const xTens = randInt(1, 9)
+  return { x: xTens * 10 + xOnes, y }
+}
+
 export function makeMulDiv(difficulty: Difficulty): Question {
+  if (difficulty === 'expert') {
+    const { x, y } = twoDigitTimesOneWithCarry()
+    return {
+      prompt: '用直式乘，由個位寫起。',
+      expression: `${x} × ${y}`,
+      column: { a: x, b: y, op: '×' },
+      answer: x * y,
+      input: 'number',
+    }
+  }
+
   const wantMul =
     difficulty === 'easy' ? true : difficulty === 'medium' ? Math.random() < 0.5 : Math.random() < 0.3
 

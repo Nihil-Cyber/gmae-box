@@ -85,7 +85,8 @@ function clamp(n: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, n))
 }
 
-export const MAX_PET_SLOTS = 6
+/** 同時放出上限跟寵物款數：商店加一款，就可以再買多一隻位。 */
+export const MAX_PET_SLOTS = PETS.length
 export const MAX_YARD_LEVEL = 3
 export const SLOT_COSTS = [12, 20, 32, 40, 52] as const
 export const YARD_COSTS = [10, 18, 28] as const
@@ -116,9 +117,18 @@ export function defaultDecorSpot(id: string): GardenSpot {
   return { x: Number.parseFloat(spot.left), y: Number.parseFloat(spot.top) }
 }
 
+function petRowXs(total: number): number[] {
+  const n = Math.max(1, total)
+  if (PET_XS[n]) return PET_XS[n]
+  if (n === 1) return [50]
+  const left = 12
+  const right = 88
+  return Array.from({ length: n }, (_, i) => left + (i * (right - left)) / (n - 1))
+}
+
 export function defaultPetSpot(index: number, total: number): GardenSpot {
-  const n = Math.min(6, Math.max(1, total))
-  const xs = PET_XS[n] ?? PET_XS[1]
+  const n = Math.max(1, total)
+  const xs = petRowXs(n)
   const x = xs[Math.min(Math.max(0, index), xs.length - 1)] ?? 50
   return { x, y: 74 + (index % 2) * 6 }
 }
@@ -148,8 +158,10 @@ function cleanSpots(
 }
 
 export function nextSlotCost(slots: number): number | null {
-  if (slots >= MAX_PET_SLOTS) return null
-  return SLOT_COSTS[slots - 1] ?? null
+  if (slots < 1 || slots >= MAX_PET_SLOTS) return null
+  const known = SLOT_COSTS[slots - 1]
+  if (known != null) return known
+  return SLOT_COSTS[SLOT_COSTS.length - 1] + 12 * (slots - SLOT_COSTS.length)
 }
 
 export function nextYardCost(level: number): number | null {

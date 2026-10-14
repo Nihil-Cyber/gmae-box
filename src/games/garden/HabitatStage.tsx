@@ -82,13 +82,17 @@ export function HabitatStage({
   }, [yardLevel, onMovePet, onMoveDecor])
   const crowd = pets.length >= 3
   const petPx =
-    pets.length >= 5
-      ? Math.round(size.petPhone * 0.68)
-      : crowd
-        ? Math.round(size.petPhone * 0.78)
-        : pets.length === 2
-          ? Math.round(size.petPhone * 0.9)
-          : size.petPhone
+    pets.length >= 9
+      ? Math.round(size.petPhone * 0.52)
+      : pets.length >= 7
+        ? Math.round(size.petPhone * 0.6)
+        : pets.length >= 5
+          ? Math.round(size.petPhone * 0.68)
+          : crowd
+            ? Math.round(size.petPhone * 0.78)
+            : pets.length === 2
+              ? Math.round(size.petPhone * 0.9)
+              : size.petPhone
   const poses = usePetWander(pets, wanderPaused || Boolean(drag))
 
   useEffect(() => {

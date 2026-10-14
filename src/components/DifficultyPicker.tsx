@@ -1,10 +1,10 @@
-import type { Difficulty } from '../types'
+import type { BasicDifficulty } from '../types'
 import { DIFFICULTY_LABEL } from '../types'
 
 type Props = {
-  value: Difficulty
-  onChange: (value: Difficulty) => void
-  hints: Record<Difficulty, string>
+  value: BasicDifficulty
+  onChange: (value: BasicDifficulty) => void
+  hints: Record<BasicDifficulty, string>
 }
 
 export function DifficultyPicker({ value, onChange, hints }: Props) {

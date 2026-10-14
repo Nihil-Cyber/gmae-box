@@ -1,5 +1,6 @@
 import type { Difficulty, Question } from '../types'
 import { pick, randInt, shuffle } from './random'
+import { contentLevel } from './skill'
 
 function sequenceAdd(difficulty: Difficulty): Question {
   const start = randInt(1, difficulty === 'easy' ? 10 : 16)
@@ -303,11 +304,8 @@ const hardMakers: Maker[] = [
 ]
 
 export function makeOlympiad(difficulty: Difficulty): Question {
+  const level = contentLevel(difficulty)
   const makers =
-    difficulty === 'easy'
-      ? easyMakers
-      : difficulty === 'hard'
-        ? hardMakers
-        : mediumMakers
-  return pick(makers)(difficulty)
+    level === 'easy' ? easyMakers : level === 'hard' ? hardMakers : mediumMakers
+  return pick(makers)(level)
 }

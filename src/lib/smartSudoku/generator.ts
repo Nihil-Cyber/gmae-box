@@ -1,4 +1,4 @@
-import type { Difficulty } from '../../types'
+import type { BasicDifficulty } from '../../types'
 import { shuffle, randInt } from '../random'
 import {
   BOX_H,
@@ -14,7 +14,7 @@ import {
 import { countSolutions } from './solver'
 import { isSolvedBoard } from './validator'
 
-export const CLUE_RANGE: Record<Difficulty, readonly [number, number]> = {
+export const CLUE_RANGE: Record<BasicDifficulty, readonly [number, number]> = {
   easy: [18, 22],
   medium: [14, 18],
   hard: [10, 14],
@@ -78,7 +78,7 @@ function stripUnique(solution: Board, target: number): Board {
   return puzzle
 }
 
-export function generatePuzzle(difficulty: Difficulty): { puzzle: Board; solution: Board } {
+export function generatePuzzle(difficulty: BasicDifficulty): { puzzle: Board; solution: Board } {
   const [min, max] = CLUE_RANGE[difficulty]
   let best: { puzzle: Board; solution: Board } | null = null
   let bestClues = 99

@@ -1,24 +1,30 @@
 import { useEffect, useRef, useState } from 'react'
-import type { Difficulty, Question, Tone } from '../types'
+import type { Difficulty, Question, QuizGameId, Tone } from '../types'
 import { DIFFICULTY_LABEL } from '../types'
 import { playCorrect, playTap, playWin, playWrong, unlockAudio } from '../lib/audio'
+import { nextSkill } from '../lib/skill'
 import { Confetti } from '../components/Confetti'
-import { DifficultyPicker } from '../components/DifficultyPicker'
 import { NumberPad } from '../components/NumberPad'
 import { IconSprite, StarMark } from '../components/IconSprite'
 import { ShapeFigure } from '../components/ShapeFigure'
+import { WordPicture } from '../components/WordPicture'
+import { ColumnMath } from '../components/ColumnMath'
 
 const TOTAL = 10
 
 type Props = {
+  gameId: QuizGameId
   title: string
   tone: Tone
   hints: Record<Difficulty, string>
+  skill: Difficulty
   muted: boolean
+  canEase: boolean
   makeQuestion: (difficulty: Difficulty) => Question
   onBack: () => void
+  onEase: () => void
   onFirstTryCorrect: () => void
-  onFinish: () => void
+  onFinish: (firstTry: number, info: { eased: boolean }) => void
 }
 
 function praise(score: number): string {
@@ -29,25 +35,30 @@ function praise(score: number): string {
 }
 
 export function QuizGame({
+  gameId,
   title,
   tone,
   hints,
+  skill,
   muted,
+  canEase,
   makeQuestion,
   onBack,
+  onEase,
   onFirstTryCorrect,
   onFinish,
 }: Props) {
   const [phase, setPhase] = useState<'setup' | 'play' | 'result'>('setup')
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy')
   const [index, setIndex] = useState(0)
-  const [question, setQuestion] = useState<Question>(() => makeQuestion('easy'))
+  const [question, setQuestion] = useState<Question>(() => makeQuestion(skill))
   const [input, setInput] = useState('')
   const [tries, setTries] = useState(0)
   const [firstTry, setFirstTry] = useState(0)
   const [feedback, setFeedback] = useState<'ok' | 'bad' | 'reveal' | null>(null)
   const [shake, setShake] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
+  const [eased, setEased] = useState(false)
+  const [roundSkill, setRoundSkill] = useState(skill)
 
   function beep(kind: 'tap' | 'ok' | 'bad' | 'win') {
     if (muted) return
@@ -58,31 +69,40 @@ export function QuizGame({
     if (kind === 'win') playWin()
   }
 
-  function nextQuestion(nextIndex: number, nextFirstTry: number) {
-    if (nextIndex >= TOTAL) {
-      setFirstTry(nextFirstTry)
-      setPhase('result')
-      setCelebrate(true)
-      beep('win')
-      onFinish()
-      return
-    }
-    setIndex(nextIndex)
-    setQuestion(makeQuestion(difficulty))
+  function resetItem(next: Question) {
+    setQuestion(next)
     setInput('')
     setTries(0)
     setFeedback(null)
     setShake(false)
   }
 
+  useEffect(() => {
+    if (phase !== 'play') return
+    resetItem(makeQuestion(skill))
+    setRoundSkill(skill)
+  }, [skill])
+
+  function nextQuestion(nextIndex: number, nextFirstTry: number) {
+    if (nextIndex >= TOTAL) {
+      setFirstTry(nextFirstTry)
+      setPhase('result')
+      setCelebrate(true)
+      beep('win')
+      onFinish(nextFirstTry, { eased })
+      return
+    }
+    setIndex(nextIndex)
+    resetItem(makeQuestion(skill))
+  }
+
   function start() {
     beep('tap')
     setIndex(0)
-    setQuestion(makeQuestion(difficulty))
-    setInput('')
-    setTries(0)
+    setRoundSkill(skill)
+    setEased(false)
+    resetItem(makeQuestion(skill))
     setFirstTry(0)
-    setFeedback(null)
     setPhase('play')
     setCelebrate(false)
   }
@@ -125,7 +145,7 @@ export function QuizGame({
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (phase !== 'play' || question.input !== 'number') return
+      if (phase !== 'play' || question.input !== 'number' || question.column) return
       if (event.key >= '0' && event.key <= '9') {
         setInput((cur) => {
           if (cur === '0') return event.key
@@ -137,7 +157,10 @@ export function QuizGame({
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [phase, question.input])
+  }, [phase, question.input, question.column])
+
+  const promoted = phase === 'result' && !eased ? nextSkill(gameId, roundSkill) : null
+  const willPromote = Boolean(promoted && firstTry >= 8)
 
   return (
     <section>
@@ -157,8 +180,22 @@ export function QuizGame({
 
       {phase === 'setup' && (
         <>
-          <p className="prompt">揀難度，然後開始 10 題練習。</p>
-          <DifficultyPicker value={difficulty} onChange={setDifficulty} hints={hints} />
+          <p className="prompt">
+            而家係{DIFFICULTY_LABEL[skill]}：{hints[skill]}
+          </p>
+          <p className="rules">答啱夠多分就會自動升一級。太難可以調返容易啲。</p>
+          {canEase && (
+            <button
+              type="button"
+              className="ghost"
+              onClick={() => {
+                setEased(true)
+                onEase()
+              }}
+            >
+              太難？調返容易啲
+            </button>
+          )}
           <button type="button" className="primary" onClick={start}>
             開始遊戲
           </button>
@@ -174,8 +211,20 @@ export function QuizGame({
             />
           </div>
           <p className="rules">
-            {DIFFICULTY_LABEL[difficulty]} · 第 {index + 1} / {TOTAL} 題
+            {DIFFICULTY_LABEL[skill]} · 第 {index + 1} / {TOTAL} 題
           </p>
+          {canEase && (
+            <button
+              type="button"
+              className="ease-btn"
+              onClick={() => {
+                setEased(true)
+                onEase()
+              }}
+            >
+              太難？調返容易啲
+            </button>
+          )}
           <div className={`question-card ${shake ? 'shake' : ''}`}>
             <p className="prompt">{question.prompt}</p>
             {question.speak && (
@@ -203,14 +252,31 @@ export function QuizGame({
                 ))}
               </div>
             )}
-            {question.expression && (
+            {question.picture && (
+              <WordPicture id={question.picture} label={question.prompt} />
+            )}
+            {question.column && (
+              <ColumnMath
+                a={question.column.a}
+                b={question.column.b}
+                op={question.column.op}
+                expected={Number(question.answer)}
+                disabled={feedback === 'ok' || feedback === 'reveal'}
+                revealed={feedback === 'reveal'}
+                onDigit={() => {
+                  if (feedback === 'bad') setFeedback(null)
+                }}
+                onSubmit={(value) => check(value)}
+              />
+            )}
+            {!question.column && question.expression && (
               <p
                 className={`expression ${/[\u4e00-\u9fff]/.test(question.expression) ? 'han' : ''}`}
               >
                 {question.expression}
               </p>
             )}
-            {question.input === 'number' && (
+            {question.input === 'number' && !question.column && (
               <div className={`answer-box ${input ? '' : 'caret'}`}>{input}</div>
             )}
             <div
@@ -222,7 +288,7 @@ export function QuizGame({
             </div>
           </div>
 
-          {question.input === 'number' && (
+          {question.input === 'number' && !question.column && (
             <NumberPad
               value={input}
               onChange={(next: string) => {
@@ -304,6 +370,9 @@ export function QuizGame({
             <StarMark size={28} /> {firstTry}
           </p>
           <p>10 題入面，有 {firstTry} 題第一次就答啱。</p>
+          {willPromote && promoted && (
+            <p className="skill-up">升咗一級！下次係「{DIFFICULTY_LABEL[promoted]}」。</p>
+          )}
           <div className="actions">
             <button type="button" className="ghost" onClick={onBack}>
               返主頁

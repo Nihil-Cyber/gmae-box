@@ -49,19 +49,29 @@ function noBorrowSub(): { a: number; b: number } {
   return { a, b }
 }
 
+function carryAdd(): { a: number; b: number } {
+  const aOnes = randInt(1, 9)
+  const bOnes = randInt(10 - aOnes, 9)
+  const aTens = randInt(1, 9)
+  const bTens = randInt(1, 9)
+  return { a: aTens * 10 + aOnes, b: bTens * 10 + bOnes }
+}
+
 function pair(difficulty: Difficulty, op: '+' | '-'): { a: number; b: number } {
   if (difficulty === 'easy') return op === '+' ? singleDigitAdd() : singleDigitSub()
   if (difficulty === 'medium') return op === '+' ? within20Add() : within20Sub()
+  if (difficulty === 'expert') return carryAdd()
   return op === '+' ? noCarryAdd() : noBorrowSub()
 }
 
 export function makeAddSub(difficulty: Difficulty): Question {
-  const op: '+' | '-' = Math.random() < 0.5 ? '+' : '-'
+  const op: '+' | '-' = difficulty === 'expert' ? '+' : Math.random() < 0.5 ? '+' : '-'
   const { a, b } = pair(difficulty, op)
   const answer = op === '+' ? a + b : a - b
   return {
-    prompt: op === '+' ? '加埋係幾多？' : '差幾多？',
+    prompt: difficulty === 'expert' ? '用直式加埋，由個位寫起。' : op === '+' ? '加埋係幾多？' : '差幾多？',
     expression: `${a} ${op} ${b}`,
+    column: difficulty === 'expert' ? { a, b, op: '+' } : undefined,
     answer,
     input: 'number',
   }

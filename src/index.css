@@ -80,6 +80,22 @@ button {
   margin-bottom: 18px;
 }
 
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 4px 0 #d7c39a;
+  font-weight: 800;
+  font-size: 15px;
+}
+
 .icon-btn,
 .pill,
 .primary,
@@ -344,6 +360,146 @@ button {
 .expression.han {
   font-family: var(--sans);
   font-size: clamp(52px, 14vw, 84px);
+}
+
+.word-art {
+  display: block;
+  width: min(168px, 52vw);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 4px auto 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ease-btn {
+  display: block;
+  margin: -4px 0 10px auto;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: 14px;
+  min-height: 44px;
+  padding: 0 4px;
+}
+
+.skill-up {
+  font-weight: 800;
+  color: var(--ok);
+}
+
+.skill-list {
+  display: grid;
+  gap: 12px;
+}
+
+.skill-row {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 10px;
+}
+
+.skill-row strong {
+  display: block;
+  font-size: 18px;
+}
+
+.skill-row span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.skill-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.skill-actions .ghost {
+  flex: 1;
+  height: 44px;
+  font-size: 15px;
+}
+
+.skill-actions .ghost:disabled {
+  opacity: 0.4;
+}
+
+.column-math {
+  margin: 8px auto 0;
+}
+
+.column-grid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 6px;
+  font-family: var(--num);
+  font-weight: 700;
+}
+
+.column-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.column-digit,
+.column-op,
+.column-answer {
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+}
+
+.column-op {
+  color: var(--coral);
+}
+
+.column-carry {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+  border: 2px dashed #d7c39a;
+  border-radius: 10px;
+  background: #fff8e8;
+  font-family: var(--num);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--sun-deep);
+}
+
+.column-carry.on {
+  border-style: solid;
+  background: #fff0c8;
+}
+
+.column-rule {
+  height: 3px;
+  background: var(--ink);
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+.column-answer {
+  min-width: 44px;
+  border-radius: 12px;
+  background: white;
+  border: 3px solid #e2cc9a;
+}
+
+.column-answer.focus {
+  outline: 3px solid var(--sun);
+  background: #fff6d8;
+}
+
+.column-math .pad {
+  margin-top: 14px;
 }
 
 .speak-btn {

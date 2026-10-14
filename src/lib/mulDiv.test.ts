@@ -14,6 +14,21 @@ function parseDiv(expression: string) {
 }
 
 describe('makeMulDiv', () => {
+  it('expert is two-digit × one-digit with a ones carry, shown as 直式', () => {
+    for (let i = 0; i < 60; i += 1) {
+      const q = makeMulDiv('expert')
+      expect(q.column?.op).toBe('×')
+      const x = q.column!.a
+      const y = q.column!.b
+      expect(x).toBeGreaterThanOrEqual(10)
+      expect(x).toBeLessThanOrEqual(99)
+      expect(y).toBeGreaterThanOrEqual(2)
+      expect(y).toBeLessThanOrEqual(9)
+      expect((x % 10) * y).toBeGreaterThanOrEqual(10)
+      expect(q.answer).toBe(x * y)
+    }
+  })
+
   it('easy is multiplication tables 1 to 10', () => {
     for (let i = 0; i < 60; i += 1) {
       const q = makeMulDiv('easy')

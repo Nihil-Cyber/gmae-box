@@ -4,6 +4,7 @@ type Props = {
   onSubmit: () => void
   disabled?: boolean
   maxLen?: number
+  mode?: 'number' | 'digits'
 }
 
 export function NumberPad({
@@ -12,9 +13,14 @@ export function NumberPad({
   onSubmit,
   disabled = false,
   maxLen = 4,
+  mode = 'number',
 }: Props) {
   function append(digit: string) {
     if (disabled) return
+    if (mode === 'digits') {
+      if (value.length < maxLen) onChange(value + digit)
+      return
+    }
     if (value === '0') onChange(digit)
     else if (value.length < maxLen) onChange(value + digit)
   }

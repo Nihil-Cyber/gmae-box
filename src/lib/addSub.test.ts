@@ -7,7 +7,7 @@ function parse(expression: string): { a: number; op: '+' | '-'; b: number } {
   return { a: Number(match![1]), op: match![2] as '+' | '-', b: Number(match![3]) }
 }
 
-function sample(difficulty: 'easy' | 'medium' | 'hard', n = 80) {
+function sample(difficulty: 'easy' | 'medium' | 'hard' | 'expert', n = 80) {
   return Array.from({ length: n }, () => makeAddSub(difficulty))
 }
 
@@ -35,6 +35,18 @@ describe('makeAddSub', () => {
       expect(q.answer).toBe(answer)
       expect(answer).toBeGreaterThanOrEqual(0)
       expect(answer).toBeLessThanOrEqual(20)
+    }
+  })
+
+  it('expert is two-digit addition with a ones carry, shown as 直式', () => {
+    for (const q of sample('expert')) {
+      expect(q.column?.op).toBe('+')
+      const a = q.column!.a
+      const b = q.column!.b
+      expect(a).toBeGreaterThanOrEqual(10)
+      expect(b).toBeGreaterThanOrEqual(10)
+      expect((a % 10) + (b % 10)).toBeGreaterThanOrEqual(10)
+      expect(q.answer).toBe(a + b)
     }
   })
 

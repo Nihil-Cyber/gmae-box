@@ -86,9 +86,17 @@ describe('garden upgrades', () => {
     expect(nextSlotCost(1)).toBe(12)
     expect(nextSlotCost(4)).toBe(40)
     expect(nextSlotCost(5)).toBe(52)
+    expect(nextSlotCost(6)).toBe(64)
+    expect(nextSlotCost(MAX_PET_SLOTS - 1)).toEqual(expect.any(Number))
     expect(nextSlotCost(MAX_PET_SLOTS)).toBeNull()
     expect(nextYardCost(0)).toBe(10)
     expect(nextYardCost(3)).toBeNull()
+  })
+
+  it('lets slot upgrades grow with every pet kind', () => {
+    expect(MAX_PET_SLOTS).toBe(PETS.length)
+    expect(defaultPetSpot(11, 12).x).toBeGreaterThanOrEqual(10)
+    expect(defaultPetSpot(11, 12).x).toBeLessThanOrEqual(90)
   })
 
   it('lists the sticker pets and decorations in the shop', () => {

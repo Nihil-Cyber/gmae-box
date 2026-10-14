@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import type { Difficulty, SmartSudokuProgress } from '../../types'
+import type { BasicDifficulty, Difficulty, SmartSudokuProgress } from '../../types'
 import { DIFFICULTY_LABEL } from '../../types'
 import {
   checkCompletion,
@@ -23,7 +23,7 @@ import { NumberTray } from './NumberTray'
 import { SudokuBoard } from './SudokuBoard'
 import './smartSudoku.css'
 
-const SETUP_HINTS: Record<Difficulty, string> = {
+const SETUP_HINTS: Record<BasicDifficulty, string> = {
   easy: '已知好多格，4–5 歲都得',
   medium: '空格多啲，慢慢睇',
   hard: '已知最少，要仔細諗',
@@ -57,7 +57,7 @@ export function SmartSudokuGame({
 }: Props) {
   const mode = modeConfig('classic')
   const [phase, setPhase] = useState<'setup' | 'play' | 'win'>('setup')
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy')
+  const [difficulty, setDifficulty] = useState<BasicDifficulty>('easy')
   const [start, setStart] = useState<Board>(() => emptyBoard())
   const [board, setBoard] = useState<Board>(() => emptyBoard())
   const [given, setGiven] = useState<boolean[][]>(() => givenFrom(emptyBoard()))

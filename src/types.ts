@@ -1,4 +1,5 @@
-export type Difficulty = 'easy' | 'medium' | 'hard'
+export type BasicDifficulty = 'easy' | 'medium' | 'hard'
+export type Difficulty = BasicDifficulty | 'expert'
 export type QuizGameId =
   | 'addsub'
   | 'muldiv'
@@ -7,7 +8,7 @@ export type QuizGameId =
   | 'vocab'
   | 'shapes'
 export type GameId = QuizGameId | 'sudoku' | 'smartSudoku'
-export type Screen = 'home' | GameId | 'garden'
+export type Screen = 'home' | GameId | 'garden' | 'skill'
 export type Tone = 'mint' | 'coral' | 'grape' | 'sky' | 'rose' | 'amber' | 'peach' | 'teal'
 
 export type ShapeKind =
@@ -32,10 +33,20 @@ export type ShapeFigure = {
   rotation: number
 }
 
+export type ColumnOp = '+' | '×'
+
+export type ColumnProblem = {
+  a: number
+  b: number
+  op: ColumnOp
+}
+
 export type Question = {
   prompt: string
   expression?: string
+  picture?: string
   figures?: [ShapeFigure, ShapeFigure]
+  column?: ColumnProblem
   answer: number | string
   input: 'number' | 'compare' | 'choice' | 'same'
   choices?: string[]
@@ -46,6 +57,7 @@ export type QuizStat = {
   rounds: number
   firstTry: number
   questions: number
+  skill: Difficulty
 }
 
 export type GardenSpot = {
@@ -97,10 +109,13 @@ export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   easy: '初級',
   medium: '中級',
   hard: '高級',
+  expert: '直式',
 }
 
+export const SKILL_ORDER: Difficulty[] = ['easy', 'medium', 'hard', 'expert']
+
 export function emptyQuiz(): QuizStat {
-  return { rounds: 0, firstTry: 0, questions: 0 }
+  return { rounds: 0, firstTry: 0, questions: 0, skill: 'easy' }
 }
 
 export function emptySmartSudoku(): SmartSudokuProgress {

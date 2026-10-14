@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import type { Difficulty } from '../types'
+import type { BasicDifficulty } from '../types'
 import { DIFFICULTY_LABEL } from '../types'
 import {
   findHint,
@@ -13,13 +13,13 @@ import { Confetti } from '../components/Confetti'
 import { IconSprite, StarMark } from '../components/IconSprite'
 import { DifficultyPicker } from '../components/DifficultyPicker'
 
-const CLUES: Record<Difficulty, number> = {
+const CLUES: Record<BasicDifficulty, number> = {
   easy: 10,
   medium: 8,
   hard: 6,
 }
 
-const HINTS: Record<Difficulty, string> = {
+const HINTS: Record<BasicDifficulty, string> = {
   easy: '已知數字較多，適合入門',
   medium: '空格多啲，要慢慢推理',
   hard: '已知最少，考觀察力',
@@ -33,7 +33,7 @@ function blankGrid(): Grid {
   return Array.from({ length: 4 }, () => Array.from({ length: 4 }, () => 0))
 }
 
-function starBonus(difficulty: Difficulty): number {
+function starBonus(difficulty: BasicDifficulty): number {
   if (difficulty === 'hard') return 5
   if (difficulty === 'medium') return 4
   return 3
@@ -47,7 +47,7 @@ type Props = {
 
 export function SudokuGame({ muted, onBack, onWin }: Props) {
   const [phase, setPhase] = useState<'setup' | 'play' | 'win'>('setup')
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy')
+  const [difficulty, setDifficulty] = useState<BasicDifficulty>('easy')
   const [solution, setSolution] = useState<Grid>(blankGrid)
   const [grid, setGrid] = useState<Grid>(blankGrid)
   const [given, setGiven] = useState<boolean[][]>(() =>

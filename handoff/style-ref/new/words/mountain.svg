@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <ellipse cx="128" cy="230" rx="78" ry="11" fill="#D9784F" opacity="0.13"/>
+  <g><path d="M31 204 Q24 200 30 186 L73 83 Q83 64 97 83 L130 160 L163 106 Q176 87 189 107 L231 189 Q239 206 221 209 Z" fill="#5A4A8A"/><path d="M81 86 Q86 72 93 85 L108 121 Q97 126 89 114 Q79 127 67 121 Z" fill="#F6E7C1"/><path d="M169 111 Q176 98 183 110 L199 141 Q186 145 178 132 Q169 145 156 141 Z" fill="#FFFDF8"/><path d="M85 207 L119 139 Q127 123 137 140 L173 208 Z" fill="#9ED4AC"/></g>
+</svg>

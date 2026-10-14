@@ -1,6 +1,11 @@
-import type { GameId, Stats } from '../types'
+import type { GameId, QuizGameId, Stats } from '../types'
+import { DIFFICULTY_LABEL } from '../types'
 import { IconSprite, StarMark, type IconKind } from './IconSprite'
 import { Mascot } from './Mascot'
+
+function isQuiz(id: GameId): id is QuizGameId {
+  return id !== 'sudoku' && id !== 'smartSudoku'
+}
 
 const GAMES: {
   id: GameId
@@ -71,10 +76,11 @@ type Props = {
   stats: Stats
   onPlay: (id: GameId) => void
   onGarden: () => void
+  onSkill: () => void
   onToggleMute: () => void
 }
 
-export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
+export function Home({ stats, onPlay, onGarden, onSkill, onToggleMute }: Props) {
   const petHint = stats.garden.placedPets.length > 0 || stats.garden.activePet
     ? '寵物喺度等你摸一摸'
     : '用星星領養寵物、換裝飾'
@@ -86,14 +92,19 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
           <StarMark size={22} />
           <span>{stats.stars}</span>
         </div>
-        <button
-          type="button"
-          className="icon-btn"
-          onClick={onToggleMute}
-          aria-label={stats.muted ? '開啟聲音' : '關閉聲音'}
-        >
-          <IconSprite kind={stats.muted ? 'icon-mute' : 'icon-sound'} size={26} />
-        </button>
+        <div className="topbar-tools">
+          <button type="button" className="pill" onClick={onSkill}>
+            難度
+          </button>
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={onToggleMute}
+            aria-label={stats.muted ? '開啟聲音' : '關閉聲音'}
+          >
+            <IconSprite kind={stats.muted ? 'icon-mute' : 'icon-sound'} size={26} />
+          </button>
+        </div>
       </div>
 
       <div className="hero">
@@ -136,7 +147,10 @@ export function Home({ stats, onPlay, onGarden, onToggleMute }: Props) {
                   <IconSprite kind={game.icon} size={56} />
                 </div>
                 <h2>{game.title}</h2>
-                <p>{game.desc}</p>
+                <p>
+                  {game.desc}
+                  {isQuiz(game.id) ? ` · ${DIFFICULTY_LABEL[stats[game.id].skill]}` : ''}
+                </p>
               </div>
               <div className="meta">{extra}</div>
             </button>

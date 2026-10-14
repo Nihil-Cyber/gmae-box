@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import type { GardenSpot, GardenState, Stats } from '../types'
 import {
+  MAX_PET_SLOTS,
   PETS,
   type ShopItem,
   clampSpot,
@@ -134,7 +135,7 @@ export function Garden({ stats, onBack, onChange }: Props) {
     if (id === 'upgrade-slots') {
       const cost = nextSlotCost(garden.petSlots)
       if (cost == null) {
-        note('已經係最多隻喇')
+        note(`已經可以放出全部 ${MAX_PET_SLOTS} 款喇`)
         return
       }
       if (stats.stars < cost) {

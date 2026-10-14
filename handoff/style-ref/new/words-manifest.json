@@ -1,0 +1,446 @@
+{
+  "count": 70,
+  "recognition": [
+    "person",
+    "mouth",
+    "hand",
+    "sun",
+    "moon",
+    "water",
+    "fire",
+    "mountain",
+    "wood",
+    "sky",
+    "big",
+    "small",
+    "up",
+    "down",
+    "flower",
+    "fish",
+    "bird",
+    "car",
+    "door",
+    "rain",
+    "cat",
+    "dog",
+    "sheep",
+    "cow",
+    "horse",
+    "chicken",
+    "tree",
+    "river",
+    "sea",
+    "cloud",
+    "star",
+    "house",
+    "dad",
+    "mom",
+    "study",
+    "book",
+    "pen",
+    "ball",
+    "candy",
+    "soil",
+    "scholar",
+    "not-yet",
+    "tip",
+    "eye",
+    "too-much",
+    "enter",
+    "self",
+    "done",
+    "noon",
+    "thousand",
+    "knife",
+    "strength"
+  ],
+  "newVocabulary": [
+    "apple",
+    "banana",
+    "school",
+    "teacher",
+    "friends",
+    "happy",
+    "wash-hands",
+    "rice",
+    "family",
+    "park",
+    "rainbow",
+    "play",
+    "library",
+    "zoo",
+    "fire-truck",
+    "ice-cream",
+    "telescope",
+    "bike"
+  ],
+  "sharedVocabulary": [
+    "sun",
+    "moon",
+    "star",
+    "dog",
+    "cat",
+    "bird",
+    "flower",
+    "rain"
+  ],
+  "format": {
+    "width": 256,
+    "height": 256,
+    "viewBox": "0 0 256 256",
+    "transparent": true,
+    "shadowOpacity": 0.13
+  },
+  "files": [
+    {
+      "id": "person",
+      "label": "人",
+      "file": "words/person.svg"
+    },
+    {
+      "id": "mouth",
+      "label": "口",
+      "file": "words/mouth.svg"
+    },
+    {
+      "id": "hand",
+      "label": "手",
+      "file": "words/hand.svg"
+    },
+    {
+      "id": "sun",
+      "label": "日",
+      "file": "words/sun.svg"
+    },
+    {
+      "id": "moon",
+      "label": "月",
+      "file": "words/moon.svg"
+    },
+    {
+      "id": "water",
+      "label": "水",
+      "file": "words/water.svg"
+    },
+    {
+      "id": "fire",
+      "label": "火",
+      "file": "words/fire.svg"
+    },
+    {
+      "id": "mountain",
+      "label": "山",
+      "file": "words/mountain.svg"
+    },
+    {
+      "id": "wood",
+      "label": "木",
+      "file": "words/wood.svg"
+    },
+    {
+      "id": "sky",
+      "label": "天",
+      "file": "words/sky.svg"
+    },
+    {
+      "id": "big",
+      "label": "大",
+      "file": "words/big.svg"
+    },
+    {
+      "id": "small",
+      "label": "小",
+      "file": "words/small.svg"
+    },
+    {
+      "id": "up",
+      "label": "上",
+      "file": "words/up.svg"
+    },
+    {
+      "id": "down",
+      "label": "下",
+      "file": "words/down.svg"
+    },
+    {
+      "id": "flower",
+      "label": "花",
+      "file": "words/flower.svg"
+    },
+    {
+      "id": "fish",
+      "label": "魚",
+      "file": "words/fish.svg"
+    },
+    {
+      "id": "bird",
+      "label": "鳥",
+      "file": "words/bird.svg"
+    },
+    {
+      "id": "car",
+      "label": "車",
+      "file": "words/car.svg"
+    },
+    {
+      "id": "door",
+      "label": "門",
+      "file": "words/door.svg"
+    },
+    {
+      "id": "rain",
+      "label": "雨",
+      "file": "words/rain.svg"
+    },
+    {
+      "id": "cat",
+      "label": "貓",
+      "file": "words/cat.svg"
+    },
+    {
+      "id": "dog",
+      "label": "狗",
+      "file": "words/dog.svg"
+    },
+    {
+      "id": "sheep",
+      "label": "羊",
+      "file": "words/sheep.svg"
+    },
+    {
+      "id": "cow",
+      "label": "牛",
+      "file": "words/cow.svg"
+    },
+    {
+      "id": "horse",
+      "label": "馬",
+      "file": "words/horse.svg"
+    },
+    {
+      "id": "chicken",
+      "label": "雞",
+      "file": "words/chicken.svg"
+    },
+    {
+      "id": "tree",
+      "label": "樹",
+      "file": "words/tree.svg"
+    },
+    {
+      "id": "river",
+      "label": "河",
+      "file": "words/river.svg"
+    },
+    {
+      "id": "sea",
+      "label": "海",
+      "file": "words/sea.svg"
+    },
+    {
+      "id": "cloud",
+      "label": "雲",
+      "file": "words/cloud.svg"
+    },
+    {
+      "id": "star",
+      "label": "星",
+      "file": "words/star.svg"
+    },
+    {
+      "id": "house",
+      "label": "家",
+      "file": "words/house.svg"
+    },
+    {
+      "id": "dad",
+      "label": "爸",
+      "file": "words/dad.svg"
+    },
+    {
+      "id": "mom",
+      "label": "媽",
+      "file": "words/mom.svg"
+    },
+    {
+      "id": "study",
+      "label": "學",
+      "file": "words/study.svg"
+    },
+    {
+      "id": "book",
+      "label": "書",
+      "file": "words/book.svg"
+    },
+    {
+      "id": "pen",
+      "label": "筆",
+      "file": "words/pen.svg"
+    },
+    {
+      "id": "ball",
+      "label": "球",
+      "file": "words/ball.svg"
+    },
+    {
+      "id": "candy",
+      "label": "糖",
+      "file": "words/candy.svg"
+    },
+    {
+      "id": "soil",
+      "label": "土",
+      "file": "words/soil.svg"
+    },
+    {
+      "id": "scholar",
+      "label": "士",
+      "file": "words/scholar.svg"
+    },
+    {
+      "id": "not-yet",
+      "label": "未",
+      "file": "words/not-yet.svg"
+    },
+    {
+      "id": "tip",
+      "label": "末",
+      "file": "words/tip.svg"
+    },
+    {
+      "id": "eye",
+      "label": "目",
+      "file": "words/eye.svg"
+    },
+    {
+      "id": "too-much",
+      "label": "太",
+      "file": "words/too-much.svg"
+    },
+    {
+      "id": "enter",
+      "label": "入",
+      "file": "words/enter.svg"
+    },
+    {
+      "id": "self",
+      "label": "己",
+      "file": "words/self.svg"
+    },
+    {
+      "id": "done",
+      "label": "已",
+      "file": "words/done.svg"
+    },
+    {
+      "id": "noon",
+      "label": "午",
+      "file": "words/noon.svg"
+    },
+    {
+      "id": "thousand",
+      "label": "千",
+      "file": "words/thousand.svg"
+    },
+    {
+      "id": "knife",
+      "label": "刀",
+      "file": "words/knife.svg"
+    },
+    {
+      "id": "strength",
+      "label": "力",
+      "file": "words/strength.svg"
+    },
+    {
+      "id": "apple",
+      "label": "蘋果",
+      "file": "words/apple.svg"
+    },
+    {
+      "id": "banana",
+      "label": "香蕉",
+      "file": "words/banana.svg"
+    },
+    {
+      "id": "school",
+      "label": "學校",
+      "file": "words/school.svg"
+    },
+    {
+      "id": "teacher",
+      "label": "老師",
+      "file": "words/teacher.svg"
+    },
+    {
+      "id": "friends",
+      "label": "朋友",
+      "file": "words/friends.svg"
+    },
+    {
+      "id": "happy",
+      "label": "開心",
+      "file": "words/happy.svg"
+    },
+    {
+      "id": "wash-hands",
+      "label": "洗手",
+      "file": "words/wash-hands.svg"
+    },
+    {
+      "id": "rice",
+      "label": "吃飯",
+      "file": "words/rice.svg"
+    },
+    {
+      "id": "family",
+      "label": "家庭",
+      "file": "words/family.svg"
+    },
+    {
+      "id": "park",
+      "label": "公園",
+      "file": "words/park.svg"
+    },
+    {
+      "id": "rainbow",
+      "label": "彩虹",
+      "file": "words/rainbow.svg"
+    },
+    {
+      "id": "play",
+      "label": "遊戲",
+      "file": "words/play.svg"
+    },
+    {
+      "id": "library",
+      "label": "圖書館",
+      "file": "words/library.svg"
+    },
+    {
+      "id": "zoo",
+      "label": "動物園",
+      "file": "words/zoo.svg"
+    },
+    {
+      "id": "fire-truck",
+      "label": "消防車",
+      "file": "words/fire-truck.svg"
+    },
+    {
+      "id": "ice-cream",
+      "label": "冰淇淋",
+      "file": "words/ice-cream.svg"
+    },
+    {
+      "id": "telescope",
+      "label": "望遠鏡",
+      "file": "words/telescope.svg"
+    },
+    {
+      "id": "bike",
+      "label": "腳踏車",
+      "file": "words/bike.svg"
+    }
+  ]
+}
