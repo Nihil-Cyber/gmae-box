@@ -34,7 +34,9 @@ GitHub 檔案頁入面撳 `index.html` **唔會**行起遊戲（只會見到原�
 
 **https://nihil-cyber.github.io/gmae-box/**
 
-每次 `main` 分支有更新，GitHub Actions 都會重新編譯並發布呢個網址。
+**https://gmae-box.nihilwu.workers.dev**（Cloudflare Workers，根路徑，唔使 `/gmae-box/`）
+
+GitHub `main` 仍然會自動更新 GitHub Pages。Cloudflare 用 `npm run deploy`（Wrangler）上傳。
 
 ### 本機開發
 
@@ -48,6 +50,7 @@ npm run dev
 ```bash
 npm run build    # 產出靜態檔，方便之後部署
 npm run preview  # 預覽正式版
+npm run deploy   # 編譯並上傳到 Cloudflare Workers
 ```
 
 ## 文件

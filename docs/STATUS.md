@@ -21,6 +21,7 @@
 | 文件（狀態／問題／修復／更新紀錄） | 完成 | 見本資料夾同 `CHANGELOG.md` |
 | GitHub 新專案 | 完成 | https://github.com/Nihil-Cyber/gmae-box |
 | 線上部署（GitHub Pages 等） | 完成 | https://nihil-cyber.github.io/gmae-box/ |
+| 線上部署（Cloudflare Workers） | 完成 | https://gmae-box.nihilwu.workers.dev |
 | 自訂玩家名稱 | 未開始 | 而家固定問候 Wesley |
 
 ## 技術摘要

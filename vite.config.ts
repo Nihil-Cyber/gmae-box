@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()],
-  base: process.env.GITHUB_ACTIONS === 'true' ? '/gmae-box/' : './',
+  base: process.env.BASE_PATH || '/',
   server: {
     host: true,
     port: 5173,

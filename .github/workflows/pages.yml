@@ -24,6 +24,8 @@ jobs:
           node-version: 22
           cache: npm
       - name: Install and build
+        env:
+          BASE_PATH: /gmae-box/
         run: npm ci && npm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
